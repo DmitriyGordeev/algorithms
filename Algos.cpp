@@ -73,18 +73,20 @@ void Algos::selection_sort(int* data, int n) {
         // 1. search min element in current subsequence:
         int min_value = data[start_index];
         int min_index = start_index;
-        for(int j = start_index + 1; j < n - 1; j++) {
+        for(int j = start_index + 1; j < n; j++) {
             if(data[j] < min_value) {
                 min_value = data[j];
                 min_index = j;
             }
         }
 
+        cout << "min element: " << min_value << " | min_index = " << min_index << endl;
 
         // 2. proceeding to find first unordered occurence:
         for(int j = start_index; j < n - 1; j++) {
-            if(data[j] > data[j + 1]) {
+            if(data[j] > data[min_index]) {
                 swap(data[j], data[min_index]);
+                cout << "swap(" << data[j] << ", " << data[j + 1] << ")" << endl;
                 break;
             }
         }

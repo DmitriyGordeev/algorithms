@@ -9,6 +9,11 @@ using namespace std;
 int main()
 {
     int arr[5] = { 8, 1, 5, 17, 6 };
+    for(size_t i = 0; i < 5; i++) {
+        cout << arr[i] << " , ";
+    }
+    cout << endl << endl;
+
 
     Algos::selection_sort(arr, 5);
     cout << endl << "final: " << endl;
