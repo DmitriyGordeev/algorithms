@@ -140,3 +140,39 @@ void Algos::shaker_sort(int* data, int n) {
     }
 
 }
+
+void Algos::counting_sort(int* data, int n, int MAX_VALUE) {
+
+    int* c = new int[MAX_VALUE];
+    for(int i = 0; i < MAX_VALUE; i++) {
+        c[i] = 0;
+    }
+
+    // fill count array:
+    for(int i = 0; i < n; i++) {
+        if(data[i] > 0 && data[i] < MAX_VALUE) {
+            c[data[i]]++;
+        }
+    }
+
+    cout << "count array: ";
+    for(size_t i = 0; i < MAX_VALUE; i++) {
+        cout << c[i] << " , ";
+    }
+    cout << endl << endl;
+
+
+    // change input array:
+    int start_point = 0;
+    for(int i = 0; i < MAX_VALUE; i++)
+    {
+        int count = c[i];
+        int value = i;
+        for(int j = 0; j < count; j++) {
+            data[start_point + j] = value;
+        }
+        start_point += c[i];
+    }
+
+    delete c;
+}

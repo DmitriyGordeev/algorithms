@@ -6,14 +6,14 @@ using namespace std;
 
 int main()
 {
-    int arr[5] = { 8, 1, 5, 17, 6 };
+    int arr[5] = { 8, 1, 19, 6, 4 };
     for(size_t i = 0; i < 5; i++) {
         cout << arr[i] << " , ";
     }
     cout << endl << endl;
 
 
-    Algos::shaker_sort(arr, 5);
+    Algos::counting_sort(arr, 5, 100);
     cout << endl << "final: " << endl;
     for(size_t i = 0; i < 5; i++) {
         cout << arr[i] << " , ";
