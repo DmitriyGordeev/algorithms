@@ -13,7 +13,7 @@ void Algos::bubble_sort(int *data, int n) {
     }
 }
 
-void Algos::my_sort(int* data, int n) {
+void Algos::second_bubble_sort(int *data, int n) {
 
     for(int i = 0; i < n; i++) {
         for(int j = i; j < n; j++) {
@@ -95,6 +95,47 @@ void Algos::selection_sort(int* data, int n) {
         for(size_t l = 0; l < n; l++)
             cout << data[l] << " , ";
         cout << endl;
+
+    }
+
+}
+
+void Algos::shaker_sort(int* data, int n) {
+
+    for (int l = 0, r = n - 1; l < r;)
+    {
+        // from beginning:
+        for (int i = l; i < r; i++) {
+            if (data[i + 1] < data[i]) {
+                swap(data[i], data[i + 1]);
+                cout << "right: swap(" << data[i] << ", " << data[i + 1] << ")" << endl;
+            }
+        }
+        r--;
+
+
+        // output:
+        for(size_t i = 0; i < n; i++) {
+            cout << data[i] << " , ";
+        }
+        cout << endl;
+
+
+        // from end:
+        for (int i = r; i > l; i--) {
+            if (data[i - 1] >  data[i]) {
+                swap(data[i - 1], data[i]);
+                cout << "left: swap(" << data[i - 1] << ", " << data[i] << ")" << endl;
+            }
+        }
+        l++;
+
+
+        // output:
+        for(size_t i = 0; i < n; i++) {
+            cout << data[i] << " , ";
+        }
+        cout << endl << endl;
 
     }
 
