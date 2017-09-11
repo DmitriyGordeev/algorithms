@@ -24,7 +24,6 @@ void Algos::second_bubble_sort(int *data, int n) {
     }
 }
 
-
 void Algos::qsort_rec(int* data, int b, int e) {
 
     int l = b;
@@ -49,7 +48,6 @@ void Algos::qsort_rec(int* data, int b, int e) {
 void Algos::qsort(int* data, int n) {
     qsort_rec(data, 0, n - 1);
 }
-
 
 void Algos::insertion_sort(int* data, int n) {
 
@@ -176,3 +174,17 @@ void Algos::counting_sort(int* data, int n, int MAX_VALUE) {
 
     delete c;
 }
+
+int* Algos::merge_sort_rec(int* input, int* buffer, int begin, int end) {
+
+}
+
+void Algos::merge_sort(int* data, int n) {
+
+}
+
+void Algos::radix_sort(int* data, int n) {
+
+}
+
+

@@ -15,6 +15,10 @@ public:
     static void shaker_sort(int* data, int n);
     static void counting_sort(int* data, int n, int MAX_VALUE);
 
+    static int* merge_sort_rec(int* a, int* b, int begin, int end);
+    static void merge_sort(int* data, int n);
+
+    static void radix_sort(int* data, int n);
 };
 
 
