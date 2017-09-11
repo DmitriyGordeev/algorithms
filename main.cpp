@@ -1,23 +1,16 @@
 #include <iostream>
 #include <vector>
-#include "Algos.h"
+#include "Sorters.h"
 using namespace std;
-
 
 int main()
 {
-    int arr[5] = { 8, 1, 19, 6, 4 };
-    for(size_t i = 0; i < 5; i++) {
-        cout << arr[i] << " , ";
-    }
-    cout << endl << endl;
+    int arr[5] = {8, 2, 1, 5, 3};
 
+    int* ptr = Sorters::merge_sort(arr, 5);
+    for(int i = 0; i < 5; i++)
+        cout << ptr[i] << " , ";
 
-    Algos::counting_sort(arr, 5, 100);
-    cout << endl << "final: " << endl;
-    for(size_t i = 0; i < 5; i++) {
-        cout << arr[i] << " , ";
-    }
 
     return 0;
 }

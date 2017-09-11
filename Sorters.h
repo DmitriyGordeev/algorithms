@@ -2,7 +2,7 @@
 #define INHERITANCE_STDALGORITHMS_H
 
 
-class Algos {
+class Sorters {
 public:
     static void bubble_sort(int* data, int n);
     static void second_bubble_sort(int *data, int n);
@@ -15,10 +15,10 @@ public:
     static void shaker_sort(int* data, int n);
     static void counting_sort(int* data, int n, int MAX_VALUE);
 
-    static int* merge_sort_rec(int* a, int* b, int begin, int end);
-    static void merge_sort(int* data, int n);
+    static int* merge_sort_rec(int* data, int l, int r);
+    static int* merge_sort_merge(int* left, int* right, int left_n, int right_n);
+    static int* merge_sort(int* data, int n);
 
-    static void radix_sort(int* data, int n);
 };
 
 

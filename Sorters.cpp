@@ -1,10 +1,11 @@
-#include "Algos.h"
+#include "Sorters.h"
 #include <string>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-void Algos::bubble_sort(int *data, int n) {
+void Sorters::bubble_sort(int *data, int n) {
     for(size_t i = 0; i < n; i++) {
         for(size_t j = 0; j < n - 1; j++) {
             if(data[j] > data[j + 1])
@@ -13,7 +14,7 @@ void Algos::bubble_sort(int *data, int n) {
     }
 }
 
-void Algos::second_bubble_sort(int *data, int n) {
+void Sorters::second_bubble_sort(int *data, int n) {
 
     for(int i = 0; i < n; i++) {
         for(int j = i; j < n; j++) {
@@ -24,7 +25,7 @@ void Algos::second_bubble_sort(int *data, int n) {
     }
 }
 
-void Algos::qsort_rec(int* data, int b, int e) {
+void Sorters::qsort_rec(int* data, int b, int e) {
 
     int l = b;
     int r = e;
@@ -45,11 +46,11 @@ void Algos::qsort_rec(int* data, int b, int e) {
         qsort_rec(data, l, e);
 }
 
-void Algos::qsort(int* data, int n) {
+void Sorters::qsort(int* data, int n) {
     qsort_rec(data, 0, n - 1);
 }
 
-void Algos::insertion_sort(int* data, int n) {
+void Sorters::insertion_sort(int* data, int n) {
 
     for(int i = 0 ; i < n; i++)
     {
@@ -62,7 +63,7 @@ void Algos::insertion_sort(int* data, int n) {
     }
 }
 
-void Algos::selection_sort(int* data, int n) {
+void Sorters::selection_sort(int* data, int n) {
 
     for(int i = 0; i < n - 1; i++)
     {
@@ -98,7 +99,7 @@ void Algos::selection_sort(int* data, int n) {
 
 }
 
-void Algos::shaker_sort(int* data, int n) {
+void Sorters::shaker_sort(int* data, int n) {
 
     for (int l = 0, r = n - 1; l < r;)
     {
@@ -139,7 +140,7 @@ void Algos::shaker_sort(int* data, int n) {
 
 }
 
-void Algos::counting_sort(int* data, int n, int MAX_VALUE) {
+void Sorters::counting_sort(int* data, int n, int MAX_VALUE) {
 
     int* c = new int[MAX_VALUE];
     for(int i = 0; i < MAX_VALUE; i++) {
@@ -175,16 +176,58 @@ void Algos::counting_sort(int* data, int n, int MAX_VALUE) {
     delete c;
 }
 
-int* Algos::merge_sort_rec(int* input, int* buffer, int begin, int end) {
+int* Sorters::merge_sort_rec(int* data, int l, int r) {
 
+    if (l == r) {
+        return data + l;
+    }
+
+    int middle = (l + r) / 2;
+    int *left =  merge_sort_rec(data, l, middle);
+    int *right = merge_sort_rec(data, middle + 1, r);
+
+    return merge_sort_merge(left, right, middle - l + 1, r - middle);
 }
 
-void Algos::merge_sort(int* data, int n) {
+int* Sorters::merge_sort_merge(int* left, int* right, int left_n, int right_n) {
 
+    int* output = new int[left_n + right_n];
+
+    int l = 0;
+    int r = 0;
+    int i = 0;
+
+    while(l < left_n && r < right_n) {
+        if(left[l] <= right[r]) {
+            output[i] = left[l];
+            i++;
+            l++;
+        }
+        else {
+            output[i] = right[r];
+            i++;
+            r++;
+        }
+    }
+
+
+    // tails:
+    if(l < left_n) {
+        for(;l < left_n; l++) {
+            output[i] = left[l];
+            i++;
+        }
+    }
+    else if(r < right_n) {
+        for(;r < right_n; r++) {
+            output[i] = right[r];
+            i++;
+        }
+    }
+
+    return output;
 }
 
-void Algos::radix_sort(int* data, int n) {
-
+int* Sorters::merge_sort(int* data, int n) {
+    return merge_sort_rec(data, 0, n - 1);
 }
-
-
