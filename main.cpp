@@ -1,16 +1,25 @@
 #include <iostream>
+#include <memory>
 #include <vector>
-#include "Sorters.h"
+
 using namespace std;
 
-int main()
-{
-    int arr[5] = {8, 2, 1, 5, 3};
+void foo(int* data, int n) {
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n - 1; j++) {
+            if(data[j] > data[j + 1])
+                swap(data[j], data[j + 1]);
+        }
+    }
+}
 
-    int* ptr = Sorters::merge_sort(arr, 5);
+int main() {
+
+    int arr[5] = { 8, 4, 3, 19, 1 };
+    foo(arr, 5);
+
     for(int i = 0; i < 5; i++)
-        cout << ptr[i] << " , ";
-
+        cout << arr[i] << endl;
 
     return 0;
 }

@@ -3,5 +3,5 @@ project(Inheritance)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp Sorters.cpp Sorters.h)
+set(SOURCE_FILES main.cpp Sorters.cpp Sorters.h btree.cpp btree.h)
 add_executable(Inheritance ${SOURCE_FILES})
