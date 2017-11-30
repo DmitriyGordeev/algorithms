@@ -180,6 +180,7 @@ int* Sorters::merge_sort_rec(int* data, int l, int r) {
 
 int* Sorters::merge_sort_merge(int* left, int* right, int left_n, int right_n) {
 
+    // TODO: refactor recursive "new"
     int* output = new int[left_n + right_n];
 
     int l = 0;
