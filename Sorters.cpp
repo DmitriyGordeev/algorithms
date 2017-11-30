@@ -14,17 +14,6 @@ void Sorters::bubble_sort(int *data, int n) {
     }
 }
 
-void Sorters::second_bubble_sort(int *data, int n) {
-
-    for(int i = 0; i < n; i++) {
-        for(int j = i; j < n; j++) {
-            if(data[i] > data[j]) {
-                swap(data[i], data[j]);
-            }
-        }
-    }
-}
-
 void Sorters::qsort_rec(int* data, int b, int e) {
 
     int l = b;

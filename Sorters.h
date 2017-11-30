@@ -5,7 +5,6 @@
 class Sorters {
 public:
     static void bubble_sort(int* data, int n);
-    static void second_bubble_sort(int *data, int n);
 
     static void qsort_rec(int* data, int l, int r);
     static void qsort(int* data, int n);

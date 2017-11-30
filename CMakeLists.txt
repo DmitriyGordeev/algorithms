@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
-project(Inheritance)
+project(algorithms)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp Sorters.cpp Sorters.h btree.cpp btree.h)
-add_executable(Inheritance ${SOURCE_FILES})
+set(SOURCE_FILES main.cpp Sorters.cpp Sorters.h)
+add_executable(algorithms ${SOURCE_FILES})
