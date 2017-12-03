@@ -97,6 +97,21 @@ TEST(returns_correct, find) {
     EXPECT_EQ(1, f->value);
 }
 
+TEST(returns_nullptr_on_non_existing, find_parent_recursive) {
+
+    TreeTest tt;
+    tt.add(0);
+    tt.add(-1);
+    tt.add(4);
+    tt.add(7);
+    tt.add(3);
+
+
+    node* root = tt.unit_root();
+    node* p = tt.unit_find_parent_recursive(root, 10);
+    ASSERT_TRUE(p == nullptr);
+}
+
 TEST(returns_correct, find_parent_recursive) {
 
     TreeTest tt;
