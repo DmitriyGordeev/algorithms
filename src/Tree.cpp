@@ -27,6 +27,40 @@ node* Tree::find(int value)
 
 void Tree::erase(int value)
 {
+    if(_root) {
+        if(value == _root->value) {
+
+            node* r = _root;
+
+            if(!_root->left && !_root->right) {
+                _root = nullptr;
+            }
+
+            // only left:
+            else if(_root->left && !_root->right) {
+                _root = _root->left;
+            }
+
+            // only right:
+            else if(!_root->left && _root->right) {
+                _root = _root->right;
+            }
+
+            // both:
+            else {
+                node* least_of_right = seek_end(_root->right);
+                if(least_of_right) {
+                    least_of_right->left = _root->left;
+                    _root = _root->right;
+                }
+            }
+
+            delete r;
+            _size--;
+        }
+    }
+
+
     node* p = find_parent_recursive(_root, value);
     if(p == nullptr) {
         return;
@@ -55,6 +89,7 @@ void Tree::erase(int value)
             node* least_of_right = seek_end(v->right);
             if(least_of_right) {
                 least_of_right->left = v->left;
+                p->left = v->right;
             }
         }
 
@@ -84,14 +119,12 @@ void Tree::erase(int value)
             node* least_of_right = seek_end(v->right);
             if(least_of_right) {
                 least_of_right->left = v->left;
+                p->right = v->right;
             }
         }
 
         delete v;
         _size--;
-    }
-    else {
-        return;
     }
 }
 

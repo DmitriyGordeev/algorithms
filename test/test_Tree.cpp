@@ -159,6 +159,36 @@ TEST(seek_end, returns_nullptr_on_empty) {
     ASSERT_FALSE(right_end);
 }
 
+TEST(erase, erase_root_corect_structure)
+{
+    TreeTest tt = generate_tree();
+    tt.erase(0);
+
+    node* r = tt.unit_root();
+    ASSERT_TRUE(r);
+    EXPECT_EQ(4, r->value);
+    EXPECT_EQ(4, tt.size());
+
+}
+
+TEST(erase, corect_structure)
+{
+    TreeTest tt = generate_tree();
+    tt.erase(4);
+
+    node* r = tt.unit_root();
+    ASSERT_TRUE(r->right);
+    EXPECT_EQ(7, r->right->value);
+
+    ASSERT_TRUE(r->right->left);
+    EXPECT_EQ(3, r->right->left->value);
+
+    ASSERT_FALSE(r->right->right);
+
+    EXPECT_EQ(4, tt.size());
+
+}
+
 
 
 int main(int argc, char** argv) {
