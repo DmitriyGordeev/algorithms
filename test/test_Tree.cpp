@@ -14,6 +14,9 @@ public:
     node* unit_seek_end(node* entry, bool left = true) {
         return seek_end(entry, left);
     }
+    void unit_release_memory() {
+        release_memory();
+    }
     node* unit_root() const {
         return root();
     }
@@ -159,8 +162,8 @@ TEST(seek_end, returns_nullptr_on_empty) {
     ASSERT_FALSE(right_end);
 }
 
-TEST(erase, erase_root_corect_structure)
-{
+TEST(erase, erase_root_corect_structure) {
+
     TreeTest tt = generate_tree();
     tt.erase(0);
 
@@ -171,8 +174,8 @@ TEST(erase, erase_root_corect_structure)
 
 }
 
-TEST(erase, corect_structure)
-{
+TEST(erase, corect_structure) {
+
     TreeTest tt = generate_tree();
     tt.erase(4);
 
@@ -188,8 +191,6 @@ TEST(erase, corect_structure)
     EXPECT_EQ(4, tt.size());
 
 }
-
-
 
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);

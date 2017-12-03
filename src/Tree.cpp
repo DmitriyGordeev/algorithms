@@ -5,7 +5,9 @@ Tree::Tree() {
     _root = nullptr;
 }
 
-Tree::~Tree() {}
+Tree::~Tree() {
+    release_memory();
+}
 
 
 
@@ -231,4 +233,26 @@ node* Tree::seek_end(node* entry, bool left)
         }
         return entry;
     }
+}
+
+void Tree::release_memory()
+{
+    release_recursive(_root);
+}
+
+void Tree::release_recursive(node* entry)
+{
+    if(!entry) {
+        return;
+    }
+
+    if(entry->left) {
+        release_recursive(entry->left);
+    }
+
+    if(entry->right) {
+        release_recursive(entry->right);
+    }
+
+    delete entry;
 }

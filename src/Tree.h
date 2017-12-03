@@ -13,7 +13,6 @@ struct node
     }
 
     ~node() {
-        std::cout << "~node(): value was: " << value << std::endl;
     }
 
     int value;
@@ -40,6 +39,8 @@ protected:
 
     node* seek_end(node* entry, bool left = true);
     node* root() const { return _root; }
+    void release_memory();
+    void release_recursive(node* entry);
 
 
 private:
