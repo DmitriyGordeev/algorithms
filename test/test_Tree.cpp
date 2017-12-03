@@ -14,9 +14,6 @@ public:
     node* unit_seek_end(node* entry, bool left = true) {
         return seek_end(entry, left);
     }
-    void unit_release_memory() {
-        release_memory();
-    }
     node* unit_root() const {
         return root();
     }
@@ -35,7 +32,7 @@ TreeTest generate_tree()
     return tt;
 }
 
-TEST(unique, add) {
+TEST(add, unique_elements) {
 
     TreeTest tt;
     tt.add(0);
@@ -52,7 +49,7 @@ TEST(unique, add) {
 
 }
 
-TEST(correct_structure, add){
+TEST(add, correct_structure){
 
     TreeTest tt;
     tt.add(0);
@@ -86,13 +83,13 @@ TEST(correct_structure, add){
 
 }
 
-TEST(returns_nullptr_on_empty, find) {
+TEST(find, returns_nullptr_on_empty) {
 
     TreeTest tt;
     EXPECT_FALSE(tt.find(10));
 }
 
-TEST(returns_nullptr_on_non_existing, find) {
+TEST(find, returns_nullptr_on_non_existing) {
 
     TreeTest tt;
     tt.add(0);
@@ -102,7 +99,7 @@ TEST(returns_nullptr_on_non_existing, find) {
     EXPECT_FALSE(tt.find(2));
 }
 
-TEST(returns_correct, find) {
+TEST(find, returns_correct) {
 
     TreeTest tt;
     tt.add(0);
@@ -115,7 +112,7 @@ TEST(returns_correct, find) {
     EXPECT_EQ(1, f->value);
 }
 
-TEST(returns_nullptr_on_non_existing, find_parent_recursive) {
+TEST(find_parent_recursive, returns_nullptr_on_non_existing) {
 
     TreeTest tt = generate_tree();
 
@@ -124,7 +121,7 @@ TEST(returns_nullptr_on_non_existing, find_parent_recursive) {
     ASSERT_TRUE(p == nullptr);
 }
 
-TEST(returns_correct, find_parent_recursive) {
+TEST(find_parent_recursive, returns_correct) {
 
     TreeTest tt;
     tt.add(0);
