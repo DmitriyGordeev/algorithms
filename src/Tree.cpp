@@ -26,14 +26,33 @@ node* Tree::find(int value)
 
 void Tree::erase(int value)
 {
-    node* n = find(value);
-    if(n == nullptr) {
+    node* p = find_parent_recursive(_root, value);
+    if(p == nullptr) {
         return;
     }
 
-    if(n->left == nullptr && n->right == nullptr) {
+    node* v = nullptr;
+    if(value == p->left->value) {
+        v = p->left;
 
+        if(!v->left && !v->right) {
+            delete v;
+            p->left = nullptr;
+        }
     }
+    else if(value == p->right->value) {
+        v = p->right;
+
+        if(!v->left && !v->right) {
+            delete v;
+            p->right = nullptr;
+        }
+    }
+    else {
+        return;
+    }
+
+
 
 }
 
