@@ -11,13 +11,10 @@ public:
     node* unit_root() const {
         return root();
     }
-    size_t unit_size() const {
-        return size();
-    }
 
 };
 
-TEST(unique, add_recursive)
+TEST(unique, add)
 {
     TreeTest tt;
     tt.add(0);
@@ -33,6 +30,45 @@ TEST(unique, add_recursive)
     EXPECT_FALSE(root->right);
 
 }
+
+TEST(correct_structure, add)
+{
+    TreeTest tt;
+    tt.add(0);
+    tt.add(-1);
+    tt.add(4);
+    tt.add(7);
+    tt.add(3);
+
+    EXPECT_EQ(5, tt.size());
+    auto root = tt.unit_root();
+
+    ASSERT_TRUE(root);
+
+    ASSERT_TRUE(root->left);
+    EXPECT_EQ(-1, root->left->value);
+    EXPECT_FALSE(root->left->left);
+    EXPECT_FALSE(root->left->right);
+
+    ASSERT_TRUE(root->right);
+    EXPECT_EQ(4, root->right->value);
+
+    ASSERT_TRUE(root->right->left);
+    EXPECT_EQ(3, root->right->left->value);
+    EXPECT_FALSE(root->right->left->left);
+    EXPECT_FALSE(root->right->left->right);
+
+    ASSERT_TRUE(root->right->right);
+    EXPECT_EQ(7, root->right->right->value);
+    EXPECT_FALSE(root->right->right->left);
+    EXPECT_FALSE(root->right->right->right);
+
+}
+
+
+
+
+
 
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
