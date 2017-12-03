@@ -28,6 +28,7 @@ public:
     node* erase(int value);
 
 protected:
+    node* add_recursive(node* entry, int value);
     node* find_recursive(node* entry, int value);
 
 protected:
