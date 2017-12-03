@@ -26,12 +26,15 @@ public:
     node* add(int value);
     node* find(int value);
     node* erase(int value);
+    size_t size() const { return _size; }
 
 protected:
     node* add_recursive(node* entry, int value);
     node* find_recursive(node* entry, int value);
+    node*& root() { return _root; }
 
-protected:
+
+private:
     node* _root;
     size_t _size;
 };
