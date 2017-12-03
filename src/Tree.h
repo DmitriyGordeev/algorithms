@@ -31,7 +31,7 @@ public:
 protected:
     node* add_recursive(node* entry, int value);
     node* find_recursive(node* entry, int value);
-    node*& root() { return _root; }
+    node* root() const { return _root; }
 
 
 private:

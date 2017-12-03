@@ -8,7 +8,7 @@ public:
     node* unit_add_recursive(node* entry, int value) {
         return add_recursive(entry, value);
     }
-    node* unit_root() {
+    node* unit_root() const {
         return root();
     }
     size_t unit_size() const {
@@ -17,15 +17,20 @@ public:
 
 };
 
-TEST(returnsNull, add_recursive)
+TEST(unique, add_recursive)
 {
     TreeTest tt;
+    tt.add(0);
+    EXPECT_EQ(1, tt.size());
+
+    tt.add(0);
+    EXPECT_EQ(1, tt.size());
+
     node* root = tt.unit_root();
 
-    EXPECT_EQ(nullptr, root);
-
-    node* n = tt.unit_add_recursive(root, 0);
-    EXPECT_EQ(0, n->value);
+    EXPECT_EQ(0, root->value);
+    EXPECT_FALSE(root->left);
+    EXPECT_FALSE(root->right);
 
 }
 

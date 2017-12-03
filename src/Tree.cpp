@@ -16,7 +16,7 @@ node* Tree::add(int value)
         return _root;
     }
 
-
+    return add_recursive(_root, value);
 }
 
 node* Tree::find(int value)
