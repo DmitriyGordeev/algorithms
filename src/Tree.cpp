@@ -8,6 +8,7 @@ Tree::Tree() {
 Tree::~Tree() {}
 
 
+
 node* Tree::add(int value)
 {
     if(_root == nullptr) {
@@ -36,61 +37,62 @@ void Tree::erase(int value)
         v = p->left;
 
         if(!v->left && !v->right) {
-            delete v;
             p->left = nullptr;
         }
 
         // only left:
         else if(v->left && !v->right) {
             p->left = v->left;
-            delete v;
         }
 
         // only right:
         else if(!v->left && v->right) {
             p->left = v->right;
-            delete v;
         }
 
         // both:
         else {
-
+            node* least_of_right = seek_end(v->right);
+            if(least_of_right) {
+                least_of_right->left = v->left;
+            }
         }
 
-
+        delete v;
+        _size--;
 
     }
     else if(value == p->right->value) {
         v = p->right;
 
         if(!v->left && !v->right) {
-            delete v;
             p->right = nullptr;
         }
 
         // only left:
         else if(v->left && !v->right) {
             p->right = v->left;
-            delete v;
         }
 
         // only right:
         else if(!v->left && v->right) {
             p->right = v->right;
-            delete v;
         }
 
         // both:
         else {
-
+            node* least_of_right = seek_end(v->right);
+            if(least_of_right) {
+                least_of_right->left = v->left;
+            }
         }
+
+        delete v;
+        _size--;
     }
     else {
         return;
     }
-
-
-
 }
 
 

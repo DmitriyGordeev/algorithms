@@ -114,13 +114,7 @@ TEST(returns_correct, find) {
 
 TEST(returns_nullptr_on_non_existing, find_parent_recursive) {
 
-    TreeTest tt;
-    tt.add(0);
-    tt.add(-1);
-    tt.add(4);
-    tt.add(7);
-    tt.add(3);
-
+    TreeTest tt = generate_tree();
 
     node* root = tt.unit_root();
     node* p = tt.unit_find_parent_recursive(root, 10);
@@ -164,6 +158,7 @@ TEST(seek_end, returns_nullptr_on_empty) {
     node* right_end = tt.unit_seek_end(tt.unit_root(), false);
     ASSERT_FALSE(right_end);
 }
+
 
 
 int main(int argc, char** argv) {
