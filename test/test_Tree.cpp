@@ -65,7 +65,34 @@ TEST(correct_structure, add)
 
 }
 
+TEST(returns_nullptr_on_empty, find) {
 
+    TreeTest tt;
+    EXPECT_FALSE(tt.find(10));
+}
+
+TEST(returns_nullptr_on_non_existing, find) {
+
+    TreeTest tt;
+    tt.add(0);
+    tt.add(1);
+    tt.add(-1);
+
+    EXPECT_FALSE(tt.find(2));
+}
+
+TEST(returns_correct, find) {
+
+    TreeTest tt;
+    tt.add(0);
+    tt.add(1);
+    tt.add(-1);
+
+    auto f = tt.find(1);
+
+    EXPECT_TRUE(f);
+    EXPECT_EQ(1, f->value);
+}
 
 
 
