@@ -2,7 +2,7 @@
 #define INHERITANCE_STDALGORITHMS_H
 
 
-class Sorters {
+class Sort {
 public:
     static void bubble_sort(int* data, int n);
 
