@@ -25,12 +25,13 @@ public:
 
     node* add(int value);
     node* find(int value);
-    node* erase(int value);
+    void erase(int value);
     size_t size() const { return _size; }
 
 protected:
     node* add_recursive(node* entry, int value);
     node* find_recursive(node* entry, int value);
+    node* find_parent_recursive(node* entry, int value);
     node* root() const { return _root; }
 
 

@@ -24,8 +24,16 @@ node* Tree::find(int value)
     return find_recursive(_root, value);
 }
 
-node* Tree::erase(int value)
+void Tree::erase(int value)
 {
+    node* n = find(value);
+    if(n == nullptr) {
+        return;
+    }
+
+    if(n->left == nullptr && n->right == nullptr) {
+
+    }
 
 }
 
@@ -80,4 +88,37 @@ node* Tree::find_recursive(node* entry, int value)
     else {
         return find_recursive(entry->right, value);
     }
+}
+
+node* Tree::find_parent_recursive(node* entry, int value)
+{
+    if(entry == nullptr) {
+        return nullptr;
+    }
+
+    if(entry->left == nullptr) {
+        return nullptr;
+    }
+
+    if(entry->right == nullptr) {
+        return nullptr;
+    }
+
+    if(value == entry->left->value) {
+        return entry;
+    }
+
+    if(value == entry->right->value) {
+        return entry;
+    }
+
+    node* left_branch_result = find_parent_recursive(entry->left, value);
+    node* right_branch_result = find_parent_recursive(entry->right, value);
+
+    if(left_branch_result)
+        return left_branch_result;
+    if(right_branch_result)
+        return right_branch_result;
+
+    return nullptr;
 }

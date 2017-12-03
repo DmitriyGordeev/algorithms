@@ -8,14 +8,17 @@ public:
     node* unit_add_recursive(node* entry, int value) {
         return add_recursive(entry, value);
     }
+    node* unit_find_parent_recursive(node* entry, int value) {
+        return find_parent_recursive(entry, value);
+    }
     node* unit_root() const {
         return root();
     }
 
 };
 
-TEST(unique, add)
-{
+TEST(unique, add) {
+
     TreeTest tt;
     tt.add(0);
     EXPECT_EQ(1, tt.size());
@@ -31,8 +34,8 @@ TEST(unique, add)
 
 }
 
-TEST(correct_structure, add)
-{
+TEST(correct_structure, add){
+
     TreeTest tt;
     tt.add(0);
     tt.add(-1);
@@ -94,6 +97,21 @@ TEST(returns_correct, find) {
     EXPECT_EQ(1, f->value);
 }
 
+TEST(returns_correct, find_parent_recursive) {
+
+    TreeTest tt;
+    tt.add(0);
+    tt.add(-1);
+    tt.add(4);
+    tt.add(7);
+    tt.add(3);
+
+
+    node* root = tt.unit_root();
+    node* p = tt.unit_find_parent_recursive(root, 3);
+    ASSERT_FALSE(p == nullptr);
+    EXPECT_EQ(4, p->value);
+}
 
 
 
