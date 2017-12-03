@@ -11,11 +11,26 @@ public:
     node* unit_find_parent_recursive(node* entry, int value) {
         return find_parent_recursive(entry, value);
     }
+    node* unit_seek_end(node* entry, bool left = true) {
+        return seek_end(entry, left);
+    }
     node* unit_root() const {
         return root();
     }
 
 };
+
+TreeTest generate_tree()
+{
+    TreeTest tt;
+    tt.add(0);
+    tt.add(-1);
+    tt.add(4);
+    tt.add(7);
+    tt.add(3);
+
+    return tt;
+}
 
 TEST(unique, add) {
 
@@ -128,6 +143,27 @@ TEST(returns_correct, find_parent_recursive) {
     EXPECT_EQ(4, p->value);
 }
 
+TEST(seek_end, returns_correct) {
+
+    TreeTest tt = generate_tree();
+    node* left_end = tt.unit_seek_end(tt.unit_root());
+    ASSERT_TRUE(left_end);
+    EXPECT_EQ(-1, left_end->value);
+
+    node* right_end = tt.unit_seek_end(tt.unit_root(), false);
+    ASSERT_TRUE(right_end);
+    EXPECT_EQ(7, right_end->value);
+}
+
+TEST(seek_end, returns_nullptr_on_empty) {
+
+    TreeTest tt;
+    node* left_end = tt.unit_seek_end(tt.unit_root());
+    ASSERT_FALSE(left_end);
+
+    node* right_end = tt.unit_seek_end(tt.unit_root(), false);
+    ASSERT_FALSE(right_end);
+}
 
 
 int main(int argc, char** argv) {

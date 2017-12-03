@@ -2,6 +2,7 @@
 #define ALGORITHMS_TREE_H
 
 #include <cstddef>
+#include <iostream>
 
 struct node
 {
@@ -9,6 +10,10 @@ struct node
         this->value = value;
         left = nullptr;
         right = nullptr;
+    }
+
+    ~node() {
+        std::cout << "~node(): value was: " << value << std::endl;
     }
 
     int value;
@@ -32,6 +37,8 @@ protected:
     node* add_recursive(node* entry, int value);
     node* find_recursive(node* entry, int value);
     node* find_parent_recursive(node* entry, int value);
+
+    node* seek_end(node* entry, bool left = true);
     node* root() const { return _root; }
 
 

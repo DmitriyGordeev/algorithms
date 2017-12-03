@@ -39,6 +39,26 @@ void Tree::erase(int value)
             delete v;
             p->left = nullptr;
         }
+
+        // only left:
+        else if(v->left && !v->right) {
+            p->left = v->left;
+            delete v;
+        }
+
+        // only right:
+        else if(!v->left && v->right) {
+            p->left = v->right;
+            delete v;
+        }
+
+        // both:
+        else {
+
+        }
+
+
+
     }
     else if(value == p->right->value) {
         v = p->right;
@@ -46,6 +66,23 @@ void Tree::erase(int value)
         if(!v->left && !v->right) {
             delete v;
             p->right = nullptr;
+        }
+
+        // only left:
+        else if(v->left && !v->right) {
+            p->right = v->left;
+            delete v;
+        }
+
+        // only right:
+        else if(!v->left && v->right) {
+            p->right = v->right;
+            delete v;
+        }
+
+        // both:
+        else {
+
         }
     }
     else {
@@ -140,4 +177,23 @@ node* Tree::find_parent_recursive(node* entry, int value)
         return right_branch_result;
 
     return nullptr;
+}
+
+node* Tree::seek_end(node* entry, bool left)
+{
+    if(entry == nullptr) {
+        return nullptr;
+    }
+
+    if(left) {
+        if(entry->left) {
+            return seek_end(entry->left, left);
+        }
+        return entry;
+    } else {
+        if(entry->right) {
+            return seek_end(entry->right, left);
+        }
+        return entry;
+    }
 }
