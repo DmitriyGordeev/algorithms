@@ -216,9 +216,33 @@ node* Tree::find_parent_recursive(node* entry, int value)
     return nullptr;
 }
 
-bool Tree::is_disbalanced(node* entry)
+bool Tree::is_balanced(node* entry)
 {
+    if(!entry) {
+        return true;
+    }
 
+    // left case
+    node* l = entry->left;
+    if(l) {
+        if(entry->right)
+            return true;
+
+        if(l->left) {
+            return (l->right != nullptr);
+        }
+    }
+
+    // right case
+    node* r = entry->right;
+    if(r) {
+        if(entry->left)
+            return true;
+
+        if(r->right) {
+            return (r->left != nullptr);
+        }
+    }
 }
 
 node* Tree::seek_end(node* entry, bool left)

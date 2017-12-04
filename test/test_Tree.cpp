@@ -17,6 +17,9 @@ public:
     node* unit_root() const {
         return root();
     }
+    bool unit_is_balanced(node* entry) {
+        return is_balanced(entry);
+    }
 
 };
 
@@ -159,7 +162,7 @@ TEST(seek_end, returns_nullptr_on_empty) {
     ASSERT_FALSE(right_end);
 }
 
-TEST(erase, erase_root_corect_structure) {
+TEST(erase, erase_root_correct_structure) {
 
     TreeTest tt = generate_tree();
     tt.erase(0);
@@ -171,7 +174,7 @@ TEST(erase, erase_root_corect_structure) {
 
 }
 
-TEST(erase, corect_structure) {
+TEST(erase, correct_structure) {
 
     TreeTest tt = generate_tree();
     tt.erase(4);
@@ -187,6 +190,66 @@ TEST(erase, corect_structure) {
 
     EXPECT_EQ(4, tt.size());
 
+}
+
+TEST(is_balanced, returns_false_left_case) {
+
+    auto A = new node(0);
+    A->left = new node(-1);
+    A->left->left = new node(-2);
+
+    TreeTest tt;
+    EXPECT_FALSE(tt.unit_is_balanced(A));
+
+    delete A->left->left;
+    delete A->left;
+    delete A;
+}
+
+TEST(is_balanced, returns_false_right_case) {
+
+    auto A = new node(0);
+    A->right = new node(1);
+    A->right->right = new node(2);
+
+    TreeTest tt;
+    EXPECT_FALSE(tt.unit_is_balanced(A));
+
+    delete A->right->right;
+    delete A->right;
+    delete A;
+}
+
+TEST(is_balanced, returns_true_case_one) {
+
+    auto A = new node(0);
+    A->right = new node(1);
+    A->left = new node(-1);
+    A->right->right = new node(3);
+
+    TreeTest tt;
+    EXPECT_TRUE(tt.unit_is_balanced(A));
+
+    delete A->right->right;
+    delete A->right;
+    delete A->left;
+    delete A;
+}
+
+TEST(is_balanced, returns_true_case_two) {
+
+    auto A = new node(0);
+    A->right = new node(1);
+    A->right->right = new node(3);
+    A->right->left = new node(-1);
+
+    TreeTest tt;
+    EXPECT_TRUE(tt.unit_is_balanced(A));
+
+    delete A->right->right;
+    delete A->right;
+    delete A->left;
+    delete A;
 }
 
 int main(int argc, char** argv) {
