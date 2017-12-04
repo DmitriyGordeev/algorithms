@@ -216,7 +216,7 @@ node* Tree::find_parent_recursive(node* entry, int value)
     return nullptr;
 }
 
-bool is_disbalanced(node* entry)
+bool Tree::is_disbalanced(node* entry)
 {
 
 }

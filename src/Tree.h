@@ -45,7 +45,7 @@ protected:
     void release_recursive(node* entry);
 
 
-private:
+protected:
     node* _root;
     size_t _size;
 };
