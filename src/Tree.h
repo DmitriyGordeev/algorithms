@@ -6,14 +6,13 @@
 
 struct node
 {
-    node(int value) {
+    explicit node(int value) {
         this->value = value;
         left = nullptr;
         right = nullptr;
     }
 
-    ~node() {
-    }
+    ~node() = default;
 
     int value;
     node* left;
