@@ -35,6 +35,10 @@ namespace rbtree
         size_t size() const { return _size; }
 
     protected:
+        node* add_recursive(node* entry, int value);
+        node* find_recursive(node* entry, int value);
+
+    protected:
         node* _root;
         size_t _size;
 

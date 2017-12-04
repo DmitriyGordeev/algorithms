@@ -2,7 +2,8 @@
 
 namespace rbtree
 {
-    RedBlackTree::RedBlackTree() {
+    RedBlackTree::RedBlackTree()
+    {
         _root = nullptr;
         _size = 0;
     }
@@ -11,18 +12,23 @@ namespace rbtree
 
     node* add(int value)
     {
-
     }
 
     node* find(int value)
     {
-
     }
 
     void erase(int value)
     {
+    }
+
+    node* add_recursive(node* entry, int value)
+    {
 
     }
 
+    node* find_recursive(node* entry, int value)
+    {
+    }
 
 }
