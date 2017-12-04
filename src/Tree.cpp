@@ -245,6 +245,35 @@ bool Tree::is_balanced(node* entry)
     }
 }
 
+void Tree::balance(node* entry_parent)
+{
+    if(entry_parent->left) {
+        if(!is_balanced(entry_parent->left)) {
+            if(entry_parent->left->left) {
+                entry_parent->left->left->right = entry_parent->left;
+                entry_parent->left = entry_parent->left->left;
+            }
+            else if(entry_parent->left->right) {
+                entry_parent->left->right->left = entry_parent->left;
+                entry_parent->left = entry_parent->left->right;
+            }
+        }
+    }
+
+    if(entry_parent->right) {
+        if(!is_balanced(entry_parent->right)) {
+            if(entry_parent->right->left) {
+                entry_parent->right->left->right = entry_parent->right;
+                entry_parent->right = entry_parent->right->left;
+            }
+            else if(entry_parent->right->right) {
+                entry_parent->right->right->left = entry_parent->right;
+                entry_parent->right = entry_parent->right->right;
+            }
+        }
+    }
+}
+
 node* Tree::seek_end(node* entry, bool left)
 {
     if(entry == nullptr) {

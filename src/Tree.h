@@ -38,6 +38,7 @@ protected:
     node* find_parent_recursive(node* entry, int value);
 
     bool is_balanced(node* entry);
+    void balance(node* entry_parent);
 
     node* seek_end(node* entry, bool left = true);
     node* root() const { return _root; }
