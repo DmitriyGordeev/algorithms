@@ -20,6 +20,12 @@ public:
     bool unit_is_balanced(node* entry) {
         return is_balanced(entry);
     }
+    void unit_balance(node* entry_parent) {
+        balance(entry_parent);
+    }
+    void unit_release_recursive(node* entry) {
+        release_recursive(entry);
+    }
 
 };
 
@@ -250,6 +256,57 @@ TEST(is_balanced, returns_true_case_two) {
     delete A->right;
     delete A->left;
     delete A;
+}
+
+TEST(balance, simple_balance) {
+
+    auto A = new node(0);
+    A->right = new node(10);
+    A->right->right = new node(20);
+    A->right->right->right = new node(30);
+
+    A->left = new node(-10);
+    A->left->left = new node(-20);
+    A->left->left->left = new node(-30);
+
+    TreeTest t;
+    t.unit_balance(A);
+
+    // check if left sub-branch is balanced:
+    ASSERT_TRUE(A->left);
+    EXPECT_EQ(-20, A->left->value);
+
+    ASSERT_TRUE(A->left->left);
+    EXPECT_EQ(-30, A->left->left->value);
+
+    ASSERT_TRUE(A->left->right);
+    EXPECT_EQ(-10, A->left->right->value);
+
+    ASSERT_FALSE(A->left->left->left);
+    ASSERT_FALSE(A->left->left->right);
+
+    ASSERT_FALSE(A->left->right->left);
+    ASSERT_FALSE(A->left->right->right);
+
+
+    // check if right sub-branch is balanced:
+    ASSERT_TRUE(A->right);
+    EXPECT_EQ(20, A->right->value);
+
+    ASSERT_TRUE(A->right->left);
+    EXPECT_EQ(10, A->right->left->value);
+
+    ASSERT_TRUE(A->right->right);
+    EXPECT_EQ(30, A->right->right->value);
+
+    ASSERT_FALSE(A->right->left->left);
+    ASSERT_FALSE(A->right->left->right);
+
+    ASSERT_FALSE(A->right->right->left);
+    ASSERT_FALSE(A->right->right->right);
+
+    t.unit_release_recursive(A);
+
 }
 
 int main(int argc, char** argv) {
