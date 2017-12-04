@@ -216,6 +216,11 @@ node* Tree::find_parent_recursive(node* entry, int value)
     return nullptr;
 }
 
+bool is_disbalanced(node* entry)
+{
+
+}
+
 node* Tree::seek_end(node* entry, bool left)
 {
     if(entry == nullptr) {
@@ -256,3 +261,4 @@ void Tree::release_recursive(node* entry)
 
     delete entry;
 }
+
