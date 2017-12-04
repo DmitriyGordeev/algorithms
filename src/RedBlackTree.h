@@ -1,0 +1,11 @@
+#ifndef ALGORITHMS_REDBLACKTREE_H
+#define ALGORITHMS_REDBLACKTREE_H
+
+
+class RedBlackTree
+{
+
+};
+
+
+#endif //ALGORITHMS_REDBLACKTREE_H

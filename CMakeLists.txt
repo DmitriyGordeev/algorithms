@@ -9,9 +9,14 @@ set(SORT_SRC
 SET(TREE_SRC
         src/Tree.cpp)
 
+
+SET(RED_BLACK_TREE_SRC
+        src/RedBlackTree.cpp)
+
 set(SOURCE_FILES src/main.cpp
         ${SORT_SRC}
-        ${TREE_SRC})
+        ${TREE_SRC}
+        ${RED_BLACK_TREE_SRC})
 add_executable(algorithms ${SOURCE_FILES})
 
 # -----------------------------------------------------------
@@ -36,3 +41,11 @@ set(TREE_TEST_SOURCE
         test/test_Tree.cpp)
 add_executable(test_Tree ${TREE_TEST_SOURCE})
 target_link_libraries(test_Tree ${GTEST_LIBS})
+
+
+# RedBlackTree
+set(RED_BLACK_TREE_TEST_SOURCE
+        ${RED_BLACK_TREE_SRC}
+        test/test_RedBlackTree.cpp)
+add_executable(test_RedBlackTree ${RED_BLACK_TREE_TEST_SOURCE})
+target_link_libraries(test_RedBlackTree ${GTEST_LIBS})
