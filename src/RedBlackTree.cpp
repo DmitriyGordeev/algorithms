@@ -84,7 +84,10 @@ namespace rbtree {
                             father->color = BLACK;
                             grandfa->color = RED;
 
-                            // rotate_right()
+                            if(entry->value < father->value)
+                                rotate_right(grandfa);
+                            else
+                                // rotate_left(grandfa); ???
                         }
 
 
