@@ -5,20 +5,35 @@
 
 namespace rbtree
 {
+    enum COLOR { BLACK, RED };
     struct node
     {
-        node(int value, bool black)
+        node(int value, COLOR color)
         {
             this->value = value;
-            this->black = black;
+            this->color = color;
             this->left = nullptr;
             this->right = nullptr;
+            this->parent = nullptr;
+        }
+
+        node* bro()
+        {
+            if(this->parent) {
+                if(this == this->parent->left)
+                    return this->parent->right;
+                else
+                    return this->parent->left;
+            }
+
+            return nullptr;
         }
 
         int value;
         node* left;
         node* right;
-        bool black;
+        node* parent;
+        COLOR color;
     };
 
 
@@ -35,8 +50,9 @@ namespace rbtree
         size_t size() const { return _size; }
 
     protected:
-        node* add_recursive(node* entry, int value, bool is_black);
+        node* add_recursive(node* entry, int value);
         node* find_recursive(node* entry, int value);
+        void rotate(node* entry);
 
     protected:
         node* _root;
