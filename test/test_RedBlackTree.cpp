@@ -55,6 +55,11 @@ TEST(rotate, correct_structure)
     EXPECT_EQ(COLOR::BLACK, father->color);
     EXPECT_EQ(COLOR::RED, grandfa->color);
     EXPECT_EQ(COLOR::BLACK, uncle->color);
+
+    delete son;
+    delete uncle;
+    delete father;
+    delete grandfa;
 }
 
 
