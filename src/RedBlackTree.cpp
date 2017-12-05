@@ -86,7 +86,7 @@ namespace rbtree {
 
                             if(entry->value < father->value)
                                 rotate_right(grandfa);
-                            else
+                            // else
                                 // rotate_left(grandfa); ???
                         }
 
