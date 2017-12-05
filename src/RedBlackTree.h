@@ -17,8 +17,7 @@ namespace rbtree
             this->parent = nullptr;
         }
 
-        node* bro()
-        {
+        node* bro() {
             if(this->parent) {
                 if(this == this->parent->left)
                     return this->parent->right;
@@ -52,7 +51,9 @@ namespace rbtree
     protected:
         node* add_recursive(node* entry, int value);
         node* find_recursive(node* entry, int value);
-        void rotate(node* entry);
+        void resolve_red_red(node* entry);
+        static void rotate_left(node* node);
+        static void rotate_right(node* node);
 
     protected:
         node* _root;
