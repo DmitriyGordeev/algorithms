@@ -7,10 +7,10 @@ namespace rbtree
 {
     struct node
     {
-        node(int value, bool red)
+        node(int value, bool black)
         {
             this->value = value;
-            this->red = red;
+            this->black = black;
             this->left = nullptr;
             this->right = nullptr;
         }
@@ -18,7 +18,7 @@ namespace rbtree
         int value;
         node* left;
         node* right;
-        bool red;
+        bool black;
     };
 
 
@@ -35,7 +35,7 @@ namespace rbtree
         size_t size() const { return _size; }
 
     protected:
-        node* add_recursive(node* entry, int value);
+        node* add_recursive(node* entry, int value, bool is_black);
         node* find_recursive(node* entry, int value);
 
     protected:
