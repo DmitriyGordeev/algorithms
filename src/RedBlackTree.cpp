@@ -49,7 +49,7 @@ namespace rbtree {
             return;
 
         if(entry == _root) {
-            _root->color == COLOR::BLACK;
+            _root->color = BLACK;
             return;
         }
 
@@ -76,28 +76,26 @@ namespace rbtree {
 
                             resolve_red_red(grandfa);
                         }
+                    }
 
 
-                        // case two: uncle is black of doesn't exists
-                        if(!uncle || uncle->color == BLACK)
-                        {
+                    // case two: uncle is black of doesn't exists
+                    if(!uncle || uncle->color == BLACK)
+                    {
+                        grandfa->color = RED;
+                        if(entry->value < father->value) {
+                            rotate_right(grandfa);
                             father->color = BLACK;
-                            grandfa->color = RED;
-
-                            if(entry->value < father->value)
-                                rotate_right(grandfa);
-                            // else
-                                // rotate_left(grandfa); ???
                         }
-
-
+                        else if(entry->value > father->value)
+                        {
+                            rotate_left(father);
+                            rotate_right(grandfa);
+                            entry->color = BLACK;
+                        }
                     }
                 }
             }
-
-
-
-
         }
     }
 
