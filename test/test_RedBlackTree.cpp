@@ -42,7 +42,32 @@ TEST(bro, correct_value)
 
 }
 
-TEST(resolve_red_red, correct_structure)
+TEST(resolve_red_red, father_is_black)
+{
+    TestRB t;
+
+    node* grandfa = new node(0, COLOR::BLACK);
+    node* father  = new node(-1, COLOR::BLACK);
+    node* uncle   = new node(1, COLOR::BLACK);
+    node* son     = new node(-2, COLOR::RED);
+
+    grandfa->left = father; father->parent = grandfa;
+    grandfa->right = uncle; uncle->parent = grandfa;
+    father->left = son; son->parent = father;
+
+    t.unit_resolve_red_red(son);
+
+    EXPECT_EQ(BLACK, grandfa->color);
+    EXPECT_EQ(BLACK, father->color);
+    EXPECT_EQ(RED, son->color);
+
+    delete son;
+    delete uncle;
+    delete father;
+    delete grandfa;
+}
+
+TEST(resolve_red_red, father_red_uncle_red)
 {
     TestRB t;
 
@@ -57,10 +82,62 @@ TEST(resolve_red_red, correct_structure)
 
     t.unit_resolve_red_red(son);
 
-    EXPECT_EQ(COLOR::RED, son->color);
-    EXPECT_EQ(COLOR::BLACK, father->color);
-    EXPECT_EQ(COLOR::RED, grandfa->color);
-    EXPECT_EQ(COLOR::BLACK, uncle->color);
+    EXPECT_EQ(BLACK, father->color);
+    EXPECT_EQ(RED, son->color);
+
+    delete son;
+    delete uncle;
+    delete father;
+    delete grandfa;
+}
+
+TEST(resolve_red_red, son_left_father_red_uncle_black)
+{
+    TestRB t;
+
+    node* grandfa = new node(0, COLOR::BLACK);
+    node* father  = new node(-1, COLOR::RED);
+    node* uncle   = new node(1, COLOR::BLACK);
+    node* son     = new node(-2, COLOR::RED);
+
+    grandfa->left = father; father->parent = grandfa;
+    grandfa->right = uncle; uncle->parent = grandfa;
+    father->left = son; son->parent = father;
+
+    t.unit_resolve_red_red(son);
+
+    EXPECT_EQ(BLACK, father->color);
+    EXPECT_EQ(grandfa, father->right);
+    EXPECT_EQ(RED, grandfa->color);
+    EXPECT_EQ(uncle, grandfa->right);
+
+    delete son;
+    delete uncle;
+    delete father;
+    delete grandfa;
+}
+
+TEST(resolve_red_red, son_right_father_red_uncle_black)
+{
+    TestRB t;
+
+    node* grandfa = new node(0, COLOR::BLACK);
+    node* father  = new node(-1, COLOR::RED);
+    node* uncle   = new node(3, COLOR::BLACK);
+    node* son     = new node(2, COLOR::RED);
+
+    grandfa->left = father; father->parent = grandfa;
+    grandfa->right = uncle; uncle->parent = grandfa;
+    father->right = son; son->parent = father;
+
+    t.unit_resolve_red_red(son);
+
+    EXPECT_EQ(BLACK, son->color);
+    EXPECT_EQ(father, son->left);
+    EXPECT_EQ(RED, father->color);
+    EXPECT_EQ(grandfa, son->right);
+    EXPECT_EQ(RED, grandfa->color);
+    EXPECT_EQ(uncle, grandfa->right);
 
     delete son;
     delete uncle;

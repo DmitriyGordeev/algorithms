@@ -89,9 +89,9 @@ namespace rbtree {
                         }
                         else if(entry->value > father->value)
                         {
+                            entry->color = BLACK;
                             rotate_left(father);
                             rotate_right(grandfa);
-                            entry->color = BLACK;
                         }
                     }
                 }
