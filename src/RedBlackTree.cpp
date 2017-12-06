@@ -8,7 +8,9 @@ namespace rbtree {
         _size = 0;
     }
 
-    RedBlackTree::~RedBlackTree() {}
+    RedBlackTree::~RedBlackTree() {
+        // TODO: copy release() method from Tree
+    }
 
     node* RedBlackTree::add(int value)
     {
@@ -18,29 +20,60 @@ namespace rbtree {
             return _root;
         }
 
-
+        return add_recursive(_root, value);
     }
 
     node* RedBlackTree::find(int value)
     {
+        // TODO: copy from Tree and test
     }
 
     void RedBlackTree::erase(int value)
     {
+        // TODO
     }
 
     node* RedBlackTree::add_recursive(node* entry, int value)
     {
         if(entry == nullptr) {
             entry = new node(value, RED);
-            _size++;
             resolve_red_red(entry);
+            _size++;
             return entry;
+        }
+
+        if(value == entry->value) {
+            return nullptr;
+        }
+        else if(value < entry->value) {
+            if(entry->left == nullptr) {
+                entry->left = new node(value, RED);
+                entry->left->parent = entry;
+                resolve_red_red(entry->left);
+                _size++;
+                return entry;
+            }
+            else {
+                return add_recursive(entry->left, value);
+            }
+        }
+        else {
+            if(entry->right == nullptr) {
+                entry->right = new node(value, RED);
+                entry->right->parent = entry;
+                resolve_red_red(entry->right);
+                _size++;
+                return entry;
+            }
+            else {
+                return add_recursive(entry->right, value);
+            }
         }
     }
  
     node* RedBlackTree::find_recursive(node* entry, int value)
     {
+        // TODO
     }
 
     void RedBlackTree::resolve_red_red(node* entry)

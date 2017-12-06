@@ -10,6 +10,10 @@ class TestRB : public RedBlackTree
 public:
     TestRB() : RedBlackTree() {}
 
+    node* unit_add_recursive(node* entry, int value) {
+        return add_recursive(entry, value);
+    }
+
     void unit_resolve_red_red(node* entry) {
         resolve_red_red(entry);
     }
@@ -220,7 +224,7 @@ TEST(rotate_right, correct)
 }
 
 
-// TODO: add more tests
+// TODO: add more tests for boundaries
 
 
 int main(int argc, char** argv) {
