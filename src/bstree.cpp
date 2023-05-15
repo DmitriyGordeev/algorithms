@@ -64,6 +64,9 @@ namespace bst {
                 }
 
                 // if we need to remove the root element
+                delete cursor;
+                m_size--;
+                substitute->parent = nullptr;
                 m_root = substitute;
                 return m_root;
             }
