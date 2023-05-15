@@ -1,11 +1,11 @@
-#include "Sort.h"
+#include "sort.h"
 #include <string>
 #include <iostream>
 #include <vector>
 
 using namespace std;
 
-void Sort::bubble_sort(int *data, int n) {
+void sort::bubble_sort(int *data, int n) {
     for(size_t i = 0; i < n; i++) {
         for(size_t j = 0; j < n - 1; j++) {
             if(data[j] > data[j + 1])
@@ -14,7 +14,7 @@ void Sort::bubble_sort(int *data, int n) {
     }
 }
 
-void Sort::qsort_rec(int* data, int b, int e) {
+void sort::qsort_rec(int* data, int b, int e) {
 
     int l = b;
     int r = e;
@@ -35,11 +35,11 @@ void Sort::qsort_rec(int* data, int b, int e) {
         qsort_rec(data, l, e);
 }
 
-void Sort::qsort(int* data, int n) {
+void sort::qsort(int* data, int n) {
     qsort_rec(data, 0, n - 1);
 }
 
-void Sort::insertion_sort(int* data, int n) {
+void sort::insertion_sort(int* data, int n) {
 
     for(int i = 0 ; i < n; i++)
     {
@@ -52,7 +52,7 @@ void Sort::insertion_sort(int* data, int n) {
     }
 }
 
-void Sort::selection_sort(int* data, int n) {
+void sort::selection_sort(int* data, int n) {
 
     for(int i = 0; i < n - 1; i++)
     {
@@ -88,7 +88,7 @@ void Sort::selection_sort(int* data, int n) {
 
 }
 
-void Sort::shaker_sort(int* data, int n) {
+void sort::shaker_sort(int* data, int n) {
 
     for (int l = 0, r = n - 1; l < r;)
     {
@@ -129,7 +129,7 @@ void Sort::shaker_sort(int* data, int n) {
 
 }
 
-void Sort::counting_sort(int* data, int n, int MAX_VALUE) {
+void sort::counting_sort(int* data, int n, int MAX_VALUE) {
 
     int* c = new int[MAX_VALUE];
     for(int i = 0; i < MAX_VALUE; i++) {
@@ -165,7 +165,7 @@ void Sort::counting_sort(int* data, int n, int MAX_VALUE) {
     delete c;
 }
 
-int* Sort::merge_sort_rec(int* data, int l, int r) {
+int* sort::merge_sort_rec(int* data, int l, int r) {
 
     if (l == r) {
         return data + l;
@@ -178,7 +178,7 @@ int* Sort::merge_sort_rec(int* data, int l, int r) {
     return merge_sort_merge(left, right, middle - l + 1, r - middle);
 }
 
-int* Sort::merge_sort_merge(int* left, int* right, int left_n, int right_n) {
+int* sort::merge_sort_merge(int* left, int* right, int left_n, int right_n) {
 
     // TODO: refactor recursive "new"
     int* output = new int[left_n + right_n];
@@ -218,6 +218,6 @@ int* Sort::merge_sort_merge(int* left, int* right, int left_n, int right_n) {
     return output;
 }
 
-int* Sort::merge_sort(int* data, int n) {
+int* sort::merge_sort(int* data, int n) {
     return merge_sort_rec(data, 0, n - 1);
 }

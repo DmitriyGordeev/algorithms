@@ -1,51 +1,23 @@
 cmake_minimum_required(VERSION 3.5)
 project(algorithms)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 
-set(SORT_SRC
-        src/Sort.cpp)
+# ================================================================
+# Catch2 for testing
+Include(FetchContent)
+FetchContent_Declare(
+        Catch2
+        GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+        GIT_TAG        v2.13.1)
 
-SET(TREE_SRC
-        src/Tree.cpp)
+FetchContent_MakeAvailable(Catch2)
 
+list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/contrib)
+include(CTest)
+include(Catch)
+include_directories(${catch2_SOURCE_DIR}/include/)
 
-SET(RED_BLACK_TREE_SRC
-        src/RedBlackTree.cpp)
-
-set(SOURCE_FILES src/main.cpp
-        ${SORT_SRC}
-        ${TREE_SRC}
-        ${RED_BLACK_TREE_SRC})
-add_executable(algorithms ${SOURCE_FILES})
-
-# -----------------------------------------------------------
-# unit tests
-set(GTEST_LIBS
-        gtest
-        gtest_main
-        -pthread)
-
-
-# Sort
-set(SORT_TEST_SOURCE
-        ${SORT_SRC}
-        test/test_Sort.cpp)
-add_executable(test_Sort ${SORT_TEST_SOURCE})
-target_link_libraries(test_Sort ${GTEST_LIBS})
-
-
-# Tree
-set(TREE_TEST_SOURCE
-        ${TREE_SRC}
-        test/test_Tree.cpp)
-add_executable(test_Tree ${TREE_TEST_SOURCE})
-target_link_libraries(test_Tree ${GTEST_LIBS})
-
-
-# RedBlackTree
-set(RED_BLACK_TREE_TEST_SOURCE
-        ${RED_BLACK_TREE_SRC}
-        test/test_RedBlackTree.cpp)
-add_executable(test_RedBlackTree ${RED_BLACK_TREE_TEST_SOURCE})
-target_link_libraries(test_RedBlackTree ${GTEST_LIBS})
+# ================================================================
+add_executable(tree src/main.cpp src/bstree.cpp src/bstree.h src/avltree.cpp src/avltree.h)
+add_subdirectory(test/)
