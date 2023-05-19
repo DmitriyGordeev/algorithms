@@ -115,41 +115,48 @@ void sort::shaker_sort(int* data, int n) {
 
 }
 
-void sort::counting_sort(int* data, int n, int MAX_VALUE) {
+void sort::counting_sort(int* data, int n, int min_value, int max_value) {
+    if (!data || n <= 1 || min_value >= max_value)
+        return;
 
-    int* c = new int[MAX_VALUE];
-    for(int i = 0; i < MAX_VALUE; i++) {
-        c[i] = 0;
-    }
+    // 1. allocate hashing array and init with zeros
+    auto size = max_value - min_value;
+    int* hash_array = new int[size];
+    for (int i = 0; i < size; i++)
+        hash_array[i] = 0;
 
-    // fill count array:
+    // 2. go through original array and hash it
     for(int i = 0; i < n; i++) {
-        if(data[i] > 0 && data[i] < MAX_VALUE) {
-            c[data[i]]++;
+        if (data[i] > max_value) {
+            cout << "array has a value at index " << i << " greater than specified max_value " << max_value << "\n";
+            return;
         }
-    }
-
-    cout << "count array: ";
-    for(size_t i = 0; i < MAX_VALUE; i++) {
-        cout << c[i] << " , ";
-    }
-    cout << endl << endl;
-
-
-    // change input array:
-    int start_point = 0;
-    for(int i = 0; i < MAX_VALUE; i++)
-    {
-        int count = c[i];
-        int value = i;
-        for(int j = 0; j < count; j++) {
-            data[start_point + j] = value;
+        if (data[i] < min_value) {
+            cout << "array has a value at index " << i << " lower than specified min_value " << min_value << "\n";
+            return;
         }
-        start_point += c[i];
+
+        int hashing_index = data[i] - min_value;    // write normalized index (from 0 to (max_value - min_value))
+        hash_array[hashing_index] += 1;
     }
 
-    delete c;
+    // 3. iterate through filled hash array to sort original array
+    int i = 0;
+    int j = 0;
+    while(i < size) {
+        while (hash_array[i] > 0) {
+            data[j] = i + min_value;    // restore original value from index
+            hash_array[i]--;
+            j++;
+        }
+        i++;
+    }
+
+    // cleanup temporary memory
+    delete[] hash_array;
 }
+
+
 
 int* sort::merge_sort_rec(int* data, int l, int r) {
 

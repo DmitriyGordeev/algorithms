@@ -79,7 +79,7 @@ TEST_CASE("Sort_5", "[counting_sort()]") {
     int a[] = {-19, 2, 3, -5, 8, 9};
     int b[] = {-19, -5, 2, 3, 8, 9};
 
-    sort::counting_sort(a, 6, 100);
+    sort::counting_sort(a, 6, -20, 10);
 
     cout << "counting sort:\n";
     for (auto i = 0; i < 6; i++) {

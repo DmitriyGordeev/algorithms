@@ -13,7 +13,7 @@ public:
     static void selection_sort(int* data, int n);
 
     static void shaker_sort(int* data, int n);
-    static void counting_sort(int* data, int n, int MAX_VALUE);
+    static void counting_sort(int* data, int n, int min_value, int max_value);
 
     static int* merge_sort_rec(int* data, int l, int r);
     static int* merge_sort_merge(int* left, int* right, int left_n, int right_n);
