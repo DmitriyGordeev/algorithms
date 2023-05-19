@@ -10,8 +10,13 @@ TEST_CASE("Sort_0", "[bubble_sort()]") {
     int b[] = {-19, -5, 2, 3, 8, 9};
 
     sort::bubble_sort(a, 6);
-    for (auto i = 0; i < 6; i++)
+
+    cout << "bubble sort:\n";
+    for (auto i = 0; i < 6; i++) {
         REQUIRE(a[i] == b[i]);
+        cout << a[i] << ",";
+    }
+    cout << "\n";
 }
 
 TEST_CASE("Sort_1", "[qsort()]") {
@@ -19,8 +24,13 @@ TEST_CASE("Sort_1", "[qsort()]") {
     int b[] = {-19, -5, 2, 3, 8, 9};
 
     sort::qsort(a, 6);
-    for (auto i = 0; i < 6; i++)
+
+    cout << "qsort result:\n";
+    for (auto i = 0; i < 6; i++) {
         REQUIRE(a[i] == b[i]);
+        cout << a[i] << ",";
+    }
+    cout << "\n";
 }
 
 TEST_CASE("Sort_2", "[insertion_sort()]") {
@@ -28,8 +38,13 @@ TEST_CASE("Sort_2", "[insertion_sort()]") {
     int b[] = {-19, -5, 2, 3, 8, 9};
 
     sort::insertion_sort(a, 6);
-    for (auto i = 0; i < 6; i++)
+
+    cout << "insertion sort result:\n";
+    for (auto i = 0; i < 6; i++) {
         REQUIRE(a[i] == b[i]);
+        cout << a[i] << ",";
+    }
+    cout << "\n";
 }
 
 TEST_CASE("Sort_3", "[selection_sort()]") {
@@ -37,8 +52,13 @@ TEST_CASE("Sort_3", "[selection_sort()]") {
     int b[] = {-19, -5, 2, 3, 8, 9};
 
     sort::selection_sort(a, 6);
-    for (auto i = 0; i < 6; i++)
+
+    cout << "selection sort result:\n";
+    for (auto i = 0; i < 6; i++) {
         REQUIRE(a[i] == b[i]);
+        cout << a[i] << ",";
+    }
+    cout << "\n";
 }
 
 TEST_CASE("Sort_4", "[shaker_sort()]") {
@@ -46,8 +66,13 @@ TEST_CASE("Sort_4", "[shaker_sort()]") {
     int b[] = {-19, -5, 2, 3, 8, 9};
 
     sort::shaker_sort(a, 6);
-    for (auto i = 0; i < 6; i++)
+
+    cout << "shaker sort result:\n";
+    for (auto i = 0; i < 6; i++) {
         REQUIRE(a[i] == b[i]);
+        cout << a[i] << ",";
+    }
+    cout << "\n";
 }
 
 TEST_CASE("Sort_5", "[counting_sort()]") {
@@ -55,8 +80,13 @@ TEST_CASE("Sort_5", "[counting_sort()]") {
     int b[] = {-19, -5, 2, 3, 8, 9};
 
     sort::counting_sort(a, 6, 100);
-    for (auto i = 0; i < 6; i++)
+
+    cout << "counting sort:\n";
+    for (auto i = 0; i < 6; i++) {
         REQUIRE(a[i] == b[i]);
+        cout << a[i] << ",";
+    }
+    cout << "\n";
 }
 
 TEST_CASE("Sort_6", "[merge_sort()]") {
@@ -64,6 +94,11 @@ TEST_CASE("Sort_6", "[merge_sort()]") {
     int b[] = {-19, -5, 2, 3, 8, 9};
 
     int* c = sort::merge_sort(a, 6);
-    for (auto i = 0; i < 6; i++)
+
+    cout << "merge sort:\n";
+    for (auto i = 0; i < 6; i++) {
         REQUIRE(c[i] == b[i]);
+        cout << c[i] << ",";
+    }
+    cout << "\n";
 }

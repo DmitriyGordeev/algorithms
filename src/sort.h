@@ -1,5 +1,5 @@
-#ifndef INHERITANCE_STDALGORITHMS_H
-#define INHERITANCE_STDALGORITHMS_H
+#ifndef SORT_STDALGORITHMS_H
+#define SORT_STDALGORITHMS_H
 
 
 class sort {
@@ -11,6 +11,7 @@ public:
 
     static void insertion_sort(int* data, int n);
     static void selection_sort(int* data, int n);
+
     static void shaker_sort(int* data, int n);
     static void counting_sort(int* data, int n, int MAX_VALUE);
 
@@ -21,4 +22,4 @@ public:
 };
 
 
-#endif //INHERITANCE_STDALGORITHMS_H
+#endif //SORT_STDALGORITHMS_H

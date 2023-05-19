@@ -53,39 +53,25 @@ void sort::insertion_sort(int* data, int n) {
 }
 
 void sort::selection_sort(int* data, int n) {
+    if (n <= 1 || !data)
+        return;
 
-    for(int i = 0; i < n - 1; i++)
-    {
-        int start_index = i;
+    int min_value = data[0];
+    int min_j = 0;
+    for(int i = 0; i < n - 1; i++) {
+        min_j = i;
+        min_value = data[i];
 
-        // 1. search min element in current subsequence:
-        int min_value = data[start_index];
-        int min_index = start_index;
-        for(int j = start_index + 1; j < n; j++) {
-            if(data[j] < min_value) {
+        for(int j = i + 1; j < n; j++) {
+            if (data[j] < min_value) {
                 min_value = data[j];
-                min_index = j;
+                min_j = j;
             }
         }
 
-        cout << "min element: " << min_value << " | min_index = " << min_index << endl;
-
-        // 2. proceeding to find first unordered occurence:
-        for(int j = start_index; j < n - 1; j++) {
-            if(data[j] > data[min_index]) {
-                swap(data[j], data[min_index]);
-                cout << "swap(" << data[j] << ", " << data[j + 1] << ")" << endl;
-                break;
-            }
-        }
-
-
-        for(size_t l = 0; l < n; l++)
-            cout << data[l] << " , ";
-        cout << endl;
-
+        if (min_value < data[i])
+            swap(data[min_j], data[i]);
     }
-
 }
 
 void sort::shaker_sort(int* data, int n) {

@@ -19,5 +19,5 @@ include(Catch)
 include_directories(${catch2_SOURCE_DIR}/include/)
 
 # ================================================================
-add_executable(tree src/main.cpp src/bstree.cpp src/bstree.h src/avltree.cpp src/avltree.h)
+add_executable(main src/main.cpp src/bstree.cpp src/bstree.h src/avltree.cpp src/avltree.h)
 add_subdirectory(test/)
