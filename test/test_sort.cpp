@@ -76,17 +76,32 @@ TEST_CASE("Sort_4", "[shaker_sort()]") {
 }
 
 TEST_CASE("Sort_5", "[counting_sort()]") {
-    int a[] = {-19, 2, 3, -5, 8, 9};
-    int b[] = {-19, -5, 2, 3, 8, 9};
 
-    sort::counting_sort(a, 6, -20, 10);
+    SECTION("no repetitions") {
+        int a[] = {-19, 2, 3, -5, 8, 9};
+        int b[] = {-19, -5, 2, 3, 8, 9};
 
-    cout << "counting sort:\n";
-    for (auto i = 0; i < 6; i++) {
-        REQUIRE(a[i] == b[i]);
-        cout << a[i] << ",";
+        sort::counting_sort(a, 6, -20, 10);
+
+        for (auto i = 0; i < 6; i++) {
+            REQUIRE(a[i] == b[i]);
+            cout << a[i] << ",";
+        }
+        cout << "\n";
     }
-    cout << "\n";
+
+    SECTION("repetitions") {
+        int a[] = {1, -4, -3, -2, 1,-4};
+        int b[] = {-4, -4, -3, -2, 1, 1};
+
+        sort::counting_sort(a, 6, -10, 10);
+
+        for (auto i = 0; i < 6; i++) {
+            REQUIRE(a[i] == b[i]);
+            cout << a[i] << ",";
+        }
+        cout << "\n";
+    }
 }
 
 TEST_CASE("Sort_6", "[merge_sort()]") {
