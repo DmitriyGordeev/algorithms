@@ -62,17 +62,34 @@ TEST_CASE("Sort_3", "[selection_sort()]") {
 }
 
 TEST_CASE("Sort_4", "[shaker_sort()]") {
-    int a[] = {-19, 2, 3, -5, 8, 9};
-    int b[] = {-19, -5, 2, 3, 8, 9};
 
-    sort::shaker_sort(a, 6);
+    SECTION("random array") {
+        int a[] = {-19, 2, 3, -5, 8, 9};
+        int b[] = {-19, -5, 2, 3, 8, 9};
 
-    cout << "shaker sort result:\n";
-    for (auto i = 0; i < 6; i++) {
-        REQUIRE(a[i] == b[i]);
-        cout << a[i] << ",";
+        sort::shaker_sort(a, 6);
+
+        cout << "shaker sort result:\n";
+        for (auto i = 0; i < 6; i++) {
+            REQUIRE(a[i] == b[i]);
+            cout << a[i] << ",";
+        }
+        cout << "\n";
     }
-    cout << "\n";
+
+    SECTION("reversed") {
+        int a[] = {3, 2, 1};
+        int b[] = {1, 2, 3};
+
+        sort::shaker_sort(a, 3);
+        cout << "shaker sort:\n";
+        for(int i = 0; i < 3; i++) {
+            REQUIRE(a[i] == b[i]);
+            cout << a[i] << ",";
+        }
+        cout << "\n";
+    }
+
 }
 
 TEST_CASE("Sort_5", "[counting_sort()]") {
@@ -83,6 +100,7 @@ TEST_CASE("Sort_5", "[counting_sort()]") {
 
         sort::counting_sort(a, 6, -20, 10);
 
+        cout << "counting sort:\n";
         for (auto i = 0; i < 6; i++) {
             REQUIRE(a[i] == b[i]);
             cout << a[i] << ",";
@@ -96,6 +114,7 @@ TEST_CASE("Sort_5", "[counting_sort()]") {
 
         sort::counting_sort(a, 6, -10, 10);
 
+        cout << "counting sort:\n";
         for (auto i = 0; i < 6; i++) {
             REQUIRE(a[i] == b[i]);
             cout << a[i] << ",";
@@ -105,15 +124,34 @@ TEST_CASE("Sort_5", "[counting_sort()]") {
 }
 
 TEST_CASE("Sort_6", "[merge_sort()]") {
-    int a[] = {-19, 2, 3, -5, 8, 9};
-    int b[] = {-19, -5, 2, 3, 8, 9};
 
-    int* c = sort::merge_sort(a, 6);
+    SECTION("even size") {
+        int a[] = {-19, 2, 3, -5, 8, 9};
+        int b[] = {-19, -5, 2, 3, 8, 9};
+        int* out = sort::merge_sort(a, 6);
 
-    cout << "merge sort:\n";
-    for (auto i = 0; i < 6; i++) {
-        REQUIRE(c[i] == b[i]);
-        cout << c[i] << ",";
+        cout << "merge sort 1:\n";
+        for (int i = 0; i < 6; i++) {
+            REQUIRE(out[i] == b[i]);
+            cout << out[i] << ",";
+        }
+        cout << "\n";
     }
-    cout << "\n";
+
+    SECTION("odd size") {
+        int a[] = {4, 3, 2};
+        int b[] = {2, 3, 4};
+        int* out = sort::merge_sort(a, 3);
+
+        cout << "merge sort 2:\n";
+        for (int i = 0; i < 3; i++) {
+            REQUIRE(out[i] == b[i]);
+            cout << out[i] << ",";
+        }
+        cout << "\n";
+    }
+
+
+
+    cout << "out";
 }

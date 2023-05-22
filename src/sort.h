@@ -15,8 +15,8 @@ public:
     static void shaker_sort(int* data, int n);
     static void counting_sort(int* data, int n, int min_value, int max_value);
 
-    static int* merge_sort_rec(int* data, int l, int r);
-    static int* merge_sort_merge(int* left, int* right, int left_n, int right_n);
+    static int* merge_sort_rec(int* data, int l, int r, int* output);
+    static void merge_sort_merge(int* left, int left_size, int left_index, int* right, int right_size, int* output);
     static int* merge_sort(int* data, int n);
 
 };

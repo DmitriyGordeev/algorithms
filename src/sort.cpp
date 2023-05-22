@@ -75,44 +75,24 @@ void sort::selection_sort(int* data, int n) {
 }
 
 void sort::shaker_sort(int* data, int n) {
+    if (!data || n <= 1) return;
 
     for (int l = 0, r = n - 1; l < r;)
     {
         // from beginning:
         for (int i = l; i < r; i++) {
-            if (data[i + 1] < data[i]) {
+            if (data[i + 1] < data[i])
                 swap(data[i], data[i + 1]);
-                cout << "right: swap(" << data[i] << ", " << data[i + 1] << ")" << endl;
-            }
         }
         r--;
 
-
-        // output:
-        for(size_t i = 0; i < n; i++) {
-            cout << data[i] << " , ";
-        }
-        cout << endl;
-
-
         // from end:
         for (int i = r; i > l; i--) {
-            if (data[i - 1] >  data[i]) {
+            if (data[i - 1] >  data[i])
                 swap(data[i - 1], data[i]);
-                cout << "left: swap(" << data[i - 1] << ", " << data[i] << ")" << endl;
-            }
         }
         l++;
-
-
-        // output:
-        for(size_t i = 0; i < n; i++) {
-            cout << data[i] << " , ";
-        }
-        cout << endl << endl;
-
     }
-
 }
 
 void sort::counting_sort(int* data, int n, int min_value, int max_value) {
@@ -158,59 +138,71 @@ void sort::counting_sort(int* data, int n, int min_value, int max_value) {
 
 
 
-int* sort::merge_sort_rec(int* data, int l, int r) {
+int* sort::merge_sort_rec(int* data, int l, int r, int* output) {
 
     if (l == r) {
-        return data + l;
+        output[l] = data[l];
+        return output + l;
     }
 
     int middle = (l + r) / 2;
-    int *left =  merge_sort_rec(data, l, middle);
-    int *right = merge_sort_rec(data, middle + 1, r);
+    int *left = merge_sort_rec(data, l, middle, output);
+    int *right = merge_sort_rec(data, middle + 1, r, output);
 
-    return merge_sort_merge(left, right, middle - l + 1, r - middle);
+    merge_sort_merge(left, middle - l + 1, l,
+                     right, r - middle,
+                     output);
+
+    return output + l;
 }
 
-int* sort::merge_sort_merge(int* left, int* right, int left_n, int right_n) {
-
-    // TODO: refactor recursive "new"
-    int* output = new int[left_n + right_n];
+void sort::merge_sort_merge(int* left, int left_size, int left_index,
+                             int* right, int right_size,
+                             int* output) {
 
     int l = 0;
     int r = 0;
     int i = 0;
 
-    while(l < left_n && r < right_n) {
-        if(left[l] <= right[r]) {
-            output[i] = left[l];
-            i++;
+    int* temporary = new int[left_size + right_size];
+
+    while(l < left_size && r < right_size) {
+        if (left[l] <= right[r]) {
+            temporary[i] = left[l];
             l++;
         }
         else {
-            output[i] = right[r];
-            i++;
+            temporary[i] = right[r];
             r++;
         }
+        i++;
     }
 
-
-    // tails:
-    if(l < left_n) {
-        for(;l < left_n; l++) {
-            output[i] = left[l];
+    // one of the subarrays will not be copied fully, we need to copy remaining tail
+    if(l < left_size) {
+        for(;l < left_size; l++) {
+            temporary[i] = left[l];
             i++;
         }
     }
-    else if(r < right_n) {
-        for(;r < right_n; r++) {
-            output[i] = right[r];
+    else if(r < right_size) {
+        for(;r < right_size; r++) {
+            temporary[i] = right[r];
             i++;
         }
     }
 
-    return output;
+    // overwrite slice of 'output' with values from 'temporary' and cleanup memory
+    for(int j = 0; j < left_size + right_size; j++)
+        output[left_index + j] = temporary[j];
+    delete[] temporary;
 }
 
 int* sort::merge_sort(int* data, int n) {
-    return merge_sort_rec(data, 0, n - 1);
+    if (n <= 1)
+        return data;
+    int* output = new int[n];
+    output = merge_sort_rec(data, 0, n - 1, output);
+    // todo: change 'data' and delete 'output' ?
+    return output;
 }
