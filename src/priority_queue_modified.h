@@ -10,11 +10,12 @@ namespace priority_queue_mod {
 
     struct node {
         node() = default;
-        node(int value, node* next, int priority) :
-            m_value(value), m_next(next), m_priority(priority) {}
+        node(int value, node* next, node* prev, int priority) :
+            m_value(value), m_next(next), m_prev(prev), m_priority(priority) {}
 
         int m_value {0};
         node* m_next {nullptr};
+        node* m_prev {nullptr};
         int m_priority {0};
     };
 
@@ -24,7 +25,7 @@ namespace priority_queue_mod {
         virtual ~priority_queue();
 
         node* enqueue(int value, int priority);
-        void dequeue();
+        int dequeue();
 
     public: // todo: protected
         node* m_head {nullptr};
