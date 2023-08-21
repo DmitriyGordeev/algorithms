@@ -4,7 +4,14 @@ namespace priority_queue_mod {
     priority_queue::priority_queue(int max_priority) : m_maxPriority(max_priority) {}
 
     priority_queue::~priority_queue() {
-        // todo
+        auto cursor = m_head;
+        while(cursor) {
+            auto p = cursor->m_next;
+            delete cursor;
+            cursor = p;
+            if (cursor)
+                cursor->m_prev = nullptr;
+        }
     }
 
     node* priority_queue::enqueue(int value, int priority) {
@@ -64,6 +71,7 @@ namespace priority_queue_mod {
         int out_value = m_tail->m_value;
         auto n = m_tail;
         m_tail = m_tail->m_prev;
+        m_tail->m_next = nullptr;
         delete n;
         return out_value;
     }

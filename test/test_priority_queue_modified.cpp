@@ -5,6 +5,31 @@
 using std::cout;
 
 
+TEST_CASE("Testing destructor", "[destructor]") {
+
+    SECTION("Empty") {
+        priority_queue_mod::priority_queue pq(0);
+    }
+
+    SECTION("Single Element") {
+        priority_queue_mod::priority_queue pq(0);
+        pq.enqueue(0, 1);
+    }
+
+    SECTION("Several Elements") {
+        priority_queue_mod::priority_queue pq(0);
+        pq.enqueue(1, 1);
+        pq.enqueue(2, 2);
+    }
+
+    SECTION("Deque single element") {
+        priority_queue_mod::priority_queue pq(0);
+        pq.enqueue(1, 1);
+        pq.dequeue();
+    }
+
+}
+
 
 TEST_CASE( "Testing enqueue", "[enqueue()]" ) {
 

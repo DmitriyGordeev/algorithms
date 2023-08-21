@@ -2,6 +2,7 @@
 #define ALGORITHMS_PRIORITY_QUEUE_H
 
 #include <unordered_map>
+#include <iostream>
 
 // TODO: пояснить, что здесь не используется heap-struct
 // TODO: обобщить на template
@@ -12,6 +13,10 @@ namespace priority_queue_mod {
         node() = default;
         node(int value, node* next, node* prev, int priority) :
             m_value(value), m_next(next), m_prev(prev), m_priority(priority) {}
+
+        virtual ~node() {
+            std::cout << "node(" << m_value << ", " << m_priority <<") destroyed\n";
+        }
 
         int m_value {0};
         node* m_next {nullptr};
