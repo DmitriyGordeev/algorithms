@@ -12,7 +12,7 @@ using std::set;
 // Testing class around bucket_sort with extra function for testing only
 class test_bucket_sort: public bucket_sort {
 public:
-    test_bucket_sort() : bucket_sort(3) {}
+    test_bucket_sort(size_t max_bucket_size = 3) : bucket_sort(max_bucket_size) {}
 
     void fill_bucket_1() {
         set<int> s;
@@ -82,7 +82,20 @@ TEST_CASE( "bucket_sort", "[find_bucket()]" ) {
         bsort.find_bucket(4);
     }
 
-
-
+    SECTION("split bucket") {
+        test_bucket_sort bsort;
+        bsort.fill_bucket_4();
+        bsort.add_split_bucket(1, 1);
+    }
 }
 
+
+TEST_CASE( "bucket_sort, add", "[add()]" ) {
+    test_bucket_sort bsort;
+    bsort.add(-500);
+    bsort.add(0);
+    bsort.add(1);
+    bsort.add(3);
+
+    int a = 1000;
+}
