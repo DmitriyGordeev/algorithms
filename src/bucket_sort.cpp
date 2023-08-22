@@ -11,11 +11,6 @@ void bucket_sort::add(int value) {
         m_buckets.push_back(std::move(s));
     }
 
-    // 1. определить в какой бакет положить новое значение
-    // 2. превысим ли макс значение max_bucket_size, если положим? - нужно ли создавать новый бакет?
-
-
-
     int suitable_bucket_index = find_bucket(value);
     if (suitable_bucket_index < 0) {
         // create new bucket with new value and insert at the beginning
@@ -40,41 +35,31 @@ void bucket_sort::add(int value) {
 
 
 int bucket_sort::find_bucket(int value) {
-    int tgt_bucket = -1;
+    int tgt_bucket_index = -1;
     for(int i = 0; i < m_buckets.size(); i++) {
-        if (m_buckets[i].size() > 1) {
 
-            if (*m_buckets[i].begin() <= value && value <= *m_buckets[i].rbegin()) {
-                // попали
-                tgt_bucket = i;
-                break;
-            }
-            else if (value < *m_buckets[i].begin()) {
-                // не стоит смотреть дальше
-                break;
-            }
-            else {
-                // вышел за рамки текущего бакета
-                tgt_bucket = i + 1;
-                continue;
-            }
+        // bucket еще не полный
+        if (m_buckets[i].size() < m_max_bucket_size) {
+            tgt_bucket_index = i;
+            continue;
+        }
 
+        // если value попадает внутрь крайних значений этого бакета - попали,
+        // искать больше не нужно
+        if (*m_buckets[i].begin() <= value && value < *m_buckets[i].rbegin()) {
+            tgt_bucket_index = i;
+            break;
         }
-        else if (m_buckets[i].size() == 1) {
-            if (*m_buckets[i].begin() > value) {
-                tgt_bucket = i;
-                break;
-            }
-            else {
-                tgt_bucket = i;
-                continue;
-            }
-        }
-        else {  // bucket is empty
-            tgt_bucket = i;
+
+
+        // если бакет уже полный, а value больше его макс. значения, значит надо идти дальше
+        if (m_buckets[i].size() == m_max_bucket_size && value > *m_buckets[i].rbegin()) {
+            tgt_bucket_index = i + 1;
+            continue;
         }
     }
-    return tgt_bucket;
+
+    return tgt_bucket_index;
 }
 
 

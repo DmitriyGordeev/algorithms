@@ -61,25 +61,25 @@ TEST_CASE( "bucket_sort", "[find_bucket()]" ) {
     SECTION("one bucket") {
         test_bucket_sort bsort;
         bsort.fill_bucket_1();
-        bsort.find_bucket(1);
+        REQUIRE(bsort.find_bucket(1) == 0);
     }
 
     SECTION("two unfilled buckets") {
         test_bucket_sort bsort;
         bsort.fill_bucket_2();
-        bsort.find_bucket(1);
+        REQUIRE(bsort.find_bucket(1) == 1);
     }
 
     SECTION("two unfilled buckets 2") {
         test_bucket_sort bsort;
         bsort.fill_bucket_3();
-        bsort.find_bucket(2);
+        REQUIRE(bsort.find_bucket(2) == 1);
     }
 
     SECTION("one bucket is filled") {
         test_bucket_sort bsort;
         bsort.fill_bucket_4();
-        bsort.find_bucket(4);
+        REQUIRE(bsort.find_bucket(4) == 2);
     }
 
     SECTION("split bucket") {
