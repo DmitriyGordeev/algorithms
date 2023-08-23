@@ -101,12 +101,6 @@ TEST_CASE( "bucket_sort", "[find_bucket()]" ) {
         bsort.fill_bucket_4();
         REQUIRE(bsort.find_bucket(4) == 2);
     }
-
-    SECTION("split bucket") {
-        test_bucket_sort bsort;
-        bsort.fill_bucket_4();
-        bsort.add_split_bucket(1, 1);
-    }
 }
 
 
@@ -125,8 +119,6 @@ TEST_CASE( "bucket_sort, find__optimized", "[find__optimized()]" ) {
         REQUIRE(bsort.find__optimized(-600) == 1);
         REQUIRE(bsort.find__optimized(-900) == 0);
     }
-
-
 }
 
 
@@ -140,14 +132,29 @@ TEST_CASE( "bucket_sort, add", "[add()]" ) {
         bsort.add(3);
     }
 
-
     SECTION("add_2") {
         test_bucket_sort bsort;
-        for(int i = 0; i < 10; i++)
+        for(int i = 10; i > 0; i--)
             bsort.add(i);
         int a = 10;
     }
+}
 
 
+TEST_CASE( "bucket_sort, remove", "[remove()]" ) {
 
+    SECTION("size() and remove()") {
+        test_bucket_sort bsort;
+        bsort.add(0);
+        bsort.add(-500);
+        bsort.add(2);
+
+        REQUIRE(bsort.size() == 3);
+        bsort.remove(1);
+        REQUIRE(bsort.size() == 3);
+
+        REQUIRE(bsort.size() == 3);
+        bsort.remove(-500);
+        REQUIRE(bsort.size() == 2);
+    }
 }

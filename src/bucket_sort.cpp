@@ -11,16 +11,19 @@ void bucket_sort::add(int value) {
         m_buckets.push_back(std::move(s));
     }
 
-    int suitable_bucket_index = find_bucket(value);
+//    int suitable_bucket_index = find_bucket(value);
+    int suitable_bucket_index = find__optimized(value);
     if (suitable_bucket_index < 0) {
         // create new bucket with new value and insert at the beginning
         set<int> new_bucket {value};
         m_buckets.insert(m_buckets.begin(), new_bucket);
+        m_size++;
     }
     else if (suitable_bucket_index == m_buckets.size()) {
         // create new bucket with new value and push back to the end
         set<int> new_bucket {value};
         m_buckets.push_back(new_bucket);
+        m_size++;
     }
     else {
         // insert new value into found bucket and split,
@@ -30,6 +33,7 @@ void bucket_sort::add(int value) {
         }
         else
             m_buckets[suitable_bucket_index].insert(value);
+        m_size++;
     }
 }
 
@@ -111,38 +115,21 @@ int bucket_sort::find__optimized(int value) {
     }
 
     return index_l;
-
-
-//    int cursor = 0;
-//    int index_l = 0;
-//    int index_r = m_buckets.size() - 1;
-//    while(index_l != index_r) {
-//        cursor = (index_l + index_r) / 2;
-//        if (value < *m_buckets[cursor].begin())
-//            index_r = cursor;
-//        if (value > *m_buckets[cursor].rbegin())
-//            index_l = cursor;
-//    }
-//
-//
-//    if (m_buckets[cursor].size() == m_max_bucket_size) {
-//        // меньше сущ. минимума
-//        if (cursor == 0 && value < *m_buckets[cursor].begin())
-//            return -1;
-//
-//        // больше сущ. максимума
-//        if (cursor == m_buckets.size() - 1 && value > *m_buckets[cursor].rbegin())
-//            return (int)m_buckets.size();
-//    }
-
-
-
-
-
-    return cursor;
-
 }
 
+
+void bucket_sort::remove(int value) {
+    int bucket_index = find__optimized(value);
+    if (bucket_index >= 0 && bucket_index < m_buckets.size()) {
+        if (m_buckets[bucket_index].find(value) == m_buckets[bucket_index].end())
+            return;
+        m_buckets[bucket_index].erase(value);
+        m_size--;
+
+        if (m_buckets.empty())
+            m_buckets.erase(m_buckets.begin() + bucket_index);
+    }
+}
 
 
 void bucket_sort::add_split_bucket(int bucket_index, int value) {
