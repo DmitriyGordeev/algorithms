@@ -14,6 +14,9 @@ public:
      * if need to create a new bucket before or after existing range */
     int find_bucket(int value);
 
+
+    int find__optimized(int value);
+
     // todo: protected
     void add_split_bucket(int bucket_index, int value);
 

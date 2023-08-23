@@ -63,6 +63,88 @@ int bucket_sort::find_bucket(int value) {
 }
 
 
+// todo: сделать тесты
+int bucket_sort::find__optimized(int value) {
+    if (m_buckets.empty())
+        return -1;
+
+    if (value < *m_buckets[0].begin())
+        return (m_buckets[0].size() < m_max_bucket_size) ? 0 : -1;
+
+    if (value > *m_buckets.back().rbegin())
+        return (m_buckets.back().size() < m_max_bucket_size) ? m_buckets.size() - 1 : m_buckets.size();
+
+    int cursor = 0;
+    int index_l = 0;
+    int index_r = m_buckets.size() - 1;
+    while(index_l != index_r) {
+        cursor = (index_l + index_r) / 2;
+
+        // check cursor-ed bucket ranges
+        if (value >= *m_buckets[cursor].begin() && value <= *m_buckets[cursor].rbegin()) {
+            return cursor;
+        }
+
+        // check the left neighbor
+        if (cursor > 0) {
+            if (value < *m_buckets[cursor - 1].rbegin()) {
+                index_r = cursor - 1;
+                continue;
+            }
+            if (value == *m_buckets[cursor - 1].rbegin())
+                return cursor - 1;
+        }
+
+        // check the right neighbor
+        if (cursor < m_buckets.size() - 1) {
+            if (value > *m_buckets.back().begin()) {
+                index_l = cursor + 1;
+                continue;
+            }
+            if (value == *m_buckets.back().begin())
+                return cursor + 1;
+        }
+
+        // if cursor didn't change we leave with cursor-ed bucket
+        if (cursor == (index_l + index_r) / 2)
+            return cursor;
+    }
+
+    return index_l;
+
+
+//    int cursor = 0;
+//    int index_l = 0;
+//    int index_r = m_buckets.size() - 1;
+//    while(index_l != index_r) {
+//        cursor = (index_l + index_r) / 2;
+//        if (value < *m_buckets[cursor].begin())
+//            index_r = cursor;
+//        if (value > *m_buckets[cursor].rbegin())
+//            index_l = cursor;
+//    }
+//
+//
+//    if (m_buckets[cursor].size() == m_max_bucket_size) {
+//        // меньше сущ. минимума
+//        if (cursor == 0 && value < *m_buckets[cursor].begin())
+//            return -1;
+//
+//        // больше сущ. максимума
+//        if (cursor == m_buckets.size() - 1 && value > *m_buckets[cursor].rbegin())
+//            return (int)m_buckets.size();
+//    }
+
+
+
+
+
+    return cursor;
+
+}
+
+
+
 void bucket_sort::add_split_bucket(int bucket_index, int value) {
     std::set<int>& bucket = m_buckets[bucket_index];
     int middle_value = (*bucket.begin() + *bucket.rbegin()) / 2;
