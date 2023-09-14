@@ -206,3 +206,87 @@ int* sort::merge_sort(int* data, int n) {
     // todo: change 'data' and delete 'output' ?
     return output;
 }
+
+
+struct radix_node {
+    radix_node() = default;
+    radix_node(int value) : m_value(value) {}
+    radix_node* next {nullptr};
+    int m_value {0};
+};
+
+int* sort::radix_sort(int* data, int n) {
+    if (n <= 1 || !data)
+        return data;
+
+    // 1. searching for the max element
+    int max_value = data[0];
+    for(int i = 1; i < n; i++) {
+        if (data[i] > max_value)
+            max_value = data[i];
+    }
+
+    // 2. number of digits of the max value
+    int d = 1;
+    int m = 10;
+    while(max_value / m > 1) {
+        m *= 10;
+        d++;
+    }
+
+    radix_node** buckets = new radix_node*[10](); // each bucket is a list
+
+    for(int r = 0; r < d; r++) {    // r - current digit starting from the lowest order
+
+        // loop through array and calculate target digit depending on r
+        for(int i = 0; i < n; i++) {
+             int digit = (int)(data[i] / pow(10, r)) % 10;
+
+             // add to the bucket by index of [digit]
+             if (!buckets[digit]) {
+                 // if no nodes in the bucket - create one
+                 buckets[digit] = new radix_node(data[i]);
+             }
+             else {
+                 // add to the last existing node
+                 radix_node* cursor = buckets[digit];
+                 while(cursor->next)
+                     cursor = cursor->next;
+                 cursor->next = new radix_node(data[i]);
+             }
+        }
+
+        // Extract one by one from bucketed structure changing original 'data' array
+        int data_index = 0;
+        for(int i = 0; i < 10; i++) {
+            if (!buckets[i])
+                continue;
+
+            // TODO: удалить элемент, когда из его убирают из bucket
+
+            // iterate through current bucket's inner list and extract values into 'data'
+            radix_node* cursor = buckets[i];
+            data[data_index] = cursor->m_value;
+            data_index++;
+            if (data_index >= n) {
+                cout << "!Error: data_index should not be greater than original array size (n)" << endl;
+                return nullptr;
+            }
+
+            while(cursor->next) {
+                cursor = cursor->next;
+                data[data_index] = cursor->m_value;
+
+                if (data_index >= n) {
+                    cout << "!Error: data_index should not be greater than original array size (n)" << endl;
+                    return nullptr;
+                }
+                data_index++;
+            }
+        }
+    }
+
+    // TODO: delete buckets
+
+    return data;
+}

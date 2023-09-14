@@ -24,6 +24,7 @@ add_executable(main
         src/bstree.cpp
         src/avltree.cpp
         src/priority_queue_modified.cpp
+        src/dijkstra.cpp
         src/bucket_sort.cpp)
 
 add_subdirectory(test/)

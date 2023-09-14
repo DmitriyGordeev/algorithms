@@ -19,6 +19,7 @@ public:
     static void merge_sort_merge(int* left, int left_size, int left_index, int* right, int right_size, int* output);
     static int* merge_sort(int* data, int n);
 
+    static int* radix_sort(int* data, int n);
 };
 
 

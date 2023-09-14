@@ -5,7 +5,7 @@
 #include <iostream>
 
 // This is a priority queue version different from classic priority_queue which based on heap,
-// this structure is based on double linked list, and useful when max amount of possible priorities is relatively low
+// This structure is based on double linked list, and useful when max amount of possible priorities is relatively low
 // compared to the number of elements in queue.
 // This structure stores hash table of entries <priority -> node*> which allows to extract
 // the last element in queue for previous lower priority and append new element with given priority to it
