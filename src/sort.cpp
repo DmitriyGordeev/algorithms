@@ -266,27 +266,36 @@ int* sort::radix_sort(int* data, int n) {
 
             // iterate through current bucket's inner list and extract values into 'data'
             radix_node* cursor = buckets[i];
-            data[data_index] = cursor->m_value;
-            data_index++;
-            if (data_index >= n) {
-                cout << "!Error: data_index should not be greater than original array size (n)" << endl;
+
+            if (data_index >= n) {      // todo: удалить сообщение
+                cout << "[0] Error: data_index should not be greater than original array size (n)" << endl;
                 return nullptr;
             }
 
+            data[data_index] = cursor->m_value;
+            data_index++;
+            buckets[i] = nullptr;
+
+
+            radix_node* prev_node = cursor;
             while(cursor->next) {
                 cursor = cursor->next;
-                data[data_index] = cursor->m_value;
+                delete prev_node;   // deleting previously saved node's ref after switching cursor
 
-                if (data_index >= n) {
-                    cout << "!Error: data_index should not be greater than original array size (n)" << endl;
+                if (data_index >= n) {  // todo: удалить сообщение
+                    cout << "[1] Error: data_index should not be greater than original array size (n)" << endl;
                     return nullptr;
                 }
+
+                data[data_index] = cursor->m_value;
                 data_index++;
+                prev_node = cursor;
             }
+
+            delete prev_node;
         }
     }
 
-    // TODO: delete buckets
-
+    delete[] buckets;
     return data;
 }

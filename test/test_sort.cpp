@@ -154,7 +154,13 @@ TEST_CASE("Sort_6", "[merge_sort()]") {
 
 TEST_CASE("Sort_7", "[radix sort]") {
     int a[] = {237, 8, 12, 56, 97, 3};
-    int b[] = {-19, -5, 2, 3, 8, 9};
+    int b[] = {3, 8, 12, 56, 97, 237};
 
     int* out = sort::radix_sort(a, 6);
+    cout << "radix sort 1:\n";
+    for (int i = 0; i < 6; i++) {
+        REQUIRE(out[i] == b[i]);
+        cout << out[i] << ",";
+    }
+    cout << "\n";
 }
