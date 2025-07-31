@@ -3,6 +3,8 @@ project(algorithms)
 
 set(CMAKE_CXX_STANDARD 17)
 
+include_directories("thirdparty/acutest/")
+
 # ================================================================
 # Catch2 for testing
 Include(FetchContent)
@@ -23,8 +25,6 @@ add_executable(main
         src/main.cpp
         src/bstree.cpp
         src/avltree.cpp
-        src/priority_queue_modified.cpp
-        src/dijkstra.cpp
         src/bucket_sort.cpp)
 
 add_subdirectory(test/)
