@@ -1,0 +1,1 @@
+This repository contains quick reminder of details for some main algorithms
